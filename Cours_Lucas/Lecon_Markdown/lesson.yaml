@@ -1,0 +1,58 @@
+- Class: meta
+  Course: My Course
+  Lesson: My Lesson
+  Author: your name goes here
+  Type: Standard
+  Organization: your organization's name goes here
+  Version: 2.4.2
+
+- Class: text
+  Output: Bienvenue sur la lecon R Markdown du cours d'initiation a R !
+
+- Class: text
+  Output: R Markdown est une partie de R qui permet de generer des rapports automatiques. Ce type de rapport peut alors combiner du traitement de texte et du code R.
+
+- Class: text
+  Output: Toutefois, lorsque le code R Markdown s'execute (grace a la commande "knit"), tout le script s'execute. Il n'est pas possible de voir le rendu du script en executant les lignes de code une a une. De plus, pour que le code fonctionne sur swirl, on encadrera certaines commandes avec des guillemets.
+
+- Class: text
+  Output: Tout d'abord, nous allons definir des titres, grace a "#". Il est aussi possible de definir des sous-titres grace a "##".
+
+- Class: cmd_question
+  Output: Definissez un titre grace a "#". Ce titre contiendra la description de la variable AGE.
+  CorrectAnswer: "# Description de la variable AGE"
+  AnswerTests: val_matches('# Description de la variable AGE')
+  Hint: Il suffit d'ecrire "# Description de la variable AGE"
+
+- Class: text_question
+  Output: Maintenant nous allons ecrire une phrase contenant du texte brut et du code R. Ajoutez le code R correpondant a la phrase "La moyenne d'age de l'echantillon est "...
+  CorrectAnswer: La moyenne d'age de l'echantillon est `r mean(dataset$AGE)`
+  AnswerTests: omnitest(correctVal = "La moyenne d'age de l'echantillon est `r mean(dataset$AGE)`")
+  Hint: Rappelle toi de ce que l'on avait dit ! Pour introduire du code R, celui-ci sera ecrit dans `r ... `
+
+- Class: text
+  Output: Pour creer un tableau sur R Markdown, il faudra proceder manuellement. En effet, les en-tetes seront entoures par des "|" tel que "| En-tete 1 | En-tete 2 |". Notez l'importance des espaces ajoutes avant et apres le titre !
+
+- Class: text
+  Output: Ensuite, sous cette ligne de code, il faudra definir l'alignement (a gauche, a droite, centre) du contenu des cellules presentees en-dessous. Pour cela, on ecrira "|----:|" si le texte des cellules de la colonne correspondante est aligne a droite. Puis "|:----|" si c'est aligne a gauche. Et "|:----:|" si c'est centre. Enfin, on utilisera "|-----|" par defaut.
+
+- Class: text
+  Output: Enfin, on ajoutera les lignes du tableau de cette maniere "| cellule 1 | cellule 2 |", puis a la ligne suivante "| cellule 3 | cellule 4 |", etc.
+
+- Class: cmd_question
+  Output: Pour creer une liste de puces, le texte sera precede par un "*". Pour creer une sous-liste, on utilisera "+". Puis pour une sous-sous-liste un "-". Essayez de generer une liste contenant "pour la variable AGE".
+  CorrectAnswer: "* pour la variable AGE"
+  AnswerTests: val_matches('* pour la variable AGE')
+  Hint: On utilise le "*"
+
+- Class: text
+  Output: Passons maintenant aux chunks. On appelle un chunk un ensemble de codes R qui sera execute, son resultat sera renvoye dans le rapport. Ce resultat peut etre par exemple la creation d'un graphique.
+
+- Class: text
+  Output: Le chunk aura la synthaxe suivante = ```{r (1)} (2) ```. En (1) sera precise les options (exemples = echo, warning...). Et en (2) on aura le code en lui-meme.
+
+- Class: cmd_question
+  Output: Representez un histogramme de la variable AGE, grace a un chunk. Sans afficher le code.
+  CorrectAnswer: "```{r echo=FALSE} hist(dataset$AGE) ```"
+  AnswerTests: val_matches('```{r echo=FALSE} hist(dataset$AGE) ```')
+  Hint: Il faut rentrer = "```{r echo=FALSE} hist(dataset$AGE) ```"
