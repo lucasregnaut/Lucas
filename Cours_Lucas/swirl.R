@@ -85,5 +85,6 @@ options(encoding = 'UTF-8')
 options(encoding = "native.enc")
 
 #R markdown :
-#knitr
+#knitr (pas besoin...)
 #création de variables
+#TD fusion
