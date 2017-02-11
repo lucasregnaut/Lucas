@@ -87,4 +87,7 @@ options(encoding = "native.enc")
 #R markdown :
 #knitr (pas besoin...)
 #création de variables
-#TD fusion
+
+
+#2e leçon
+swirlify("Lecon TD fusion", "Cours Lucas")
