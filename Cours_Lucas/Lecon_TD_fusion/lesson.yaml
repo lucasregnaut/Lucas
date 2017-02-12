@@ -15,3 +15,72 @@
 
 - Class: text
   Output: 8 tables de donnees ont ete alors crees = 4 concernant les donnees medicales des individus, ce sont les tables "terrain1" a "terrain4", et 4 concernant les variables de satisfaction, les tables "tel1" a "tel4".
+
+- Class: cmd_question
+  Output: Apres avoir specifie votre environnement de travail, importez dans R la premiere table "terrain". On l'appellera "TER1".
+  CorrectAnswer: TER1 <- read.csv("TERRAIN1.txt",sep=";")
+  AnswerTests: omnitest(correctExpr='TER1 <- read.csv("TERRAIN1.txt",sep=";")')
+  Hint: Il faut utiliser la fonction "read.csv"
+
+- Class: cmd_question
+  Output: Tres bien ! Maintenant importons la deuxieme table "TER2".
+  CorrectAnswer: TER2 <- read.csv("~/TERRAIN2.txt")
+  AnswerTests: omnitest(correctExpr='TER2 <- read.csv("~/TERRAIN2.txt")')
+  Hint: Il n'y a presque aucune difference par rapport a la question precedente.
+
+- Class: cmd_question
+  Output: Et la troisieme table "TER3".
+  CorrectAnswer: TER3 <- read.csv("~/TERRAIN3.txt")
+  AnswerTests: omnitest(correctExpr='TER3 <- read.csv("~/TERRAIN3.txt")')
+  Hint: Il n'y a presque aucune difference par rapport a la question precedente.
+
+- Class: cmd_question
+  Output: Enfin la quatrieme table "TER4".
+  CorrectAnswer: TER4 <- read.csv("~/TERRAIN4.txt")
+  AnswerTests: omnitest(correctExpr='TER4 <- read.csv("~/TERRAIN4.txt")')
+  Hint: Il n'y a presque aucune difference par rapport a la question precedente.
+
+- Class: cmd_question
+  Output: Les 4 tables medicales sont ajoutees ! On va alors les fusionner grace a la fonction "rbind". Le resultat sera enregistre dans une table "MED".
+  CorrectAnswer: MED <- rbind(TEL1,TEL2,TEL3,TEL4)
+  AnswerTests: omnitest(correctExpr='MED <- rbind(TEL1,TEL2,TEL3,TEL4)')
+  Hint: Essayez plutot avec "MED <- rbind(TEL1,TEL2,TEL3,TEL4)"
+
+- Class: cmd_question
+  Output: La table MED contient alors 95 enregistrements. On verifie bien qu'il n'y a pas de doublons d'identifiant. Vous pouvez verifier par exemple que le plus grand des effectifs associes aux valeurs de l'identifiant (ID) est bien 1.
+  CorrectAnswer: max(table(MED$ID))
+  AnswerTests: omnitest(correctExpr='max(table(MED$ID))')
+  Hint: Essayez avec "max(table(MED$ID))"
+
+- Class: cmd_question
+  Output: Apres les tables medicales, on va importer les tables satisfaction. Commencons par la premiere, nommee "TEL1".
+  CorrectAnswer: TEL1 <- read.csv("~/TEL1.txt", sep=";")
+  AnswerTests: omnitest(correctExpr='TEL1 <- read.csv("~/TEL1.txt", sep=";")')
+  Hint: Rappelez vous des importations precedentes.
+
+- Class: cmd_question
+  Output: Bien joue ! Puis la deuxieme table, nommee "TEL2".
+  CorrectAnswer: TEL2 <- read.csv("~/TEL2.txt", sep=";")
+  AnswerTests: omnitest(correctExpr='TEL2 <- read.csv("~/TEL2.txt", sep=";")')
+  Hint: Rappelez vous des importations precedentes.
+
+- Class: cmd_question
+  Output: Et la troisieme table, nommee "TEL3".
+  CorrectAnswer: TEL3 <- read.csv("~/TEL3.txt", sep=";")
+  AnswerTests: omnitest(correctExpr='TEL3 <- read.csv("~/TEL3.txt", sep=";")')
+  Hint: Rappelez vous des importations precedentes.
+
+- Class: cmd_question
+  Output: Enfin la quatrieme table, nommee "TEL4".
+  CorrectAnswer: TEL4 <- read.csv("~/TEL4.txt", sep=";")
+  AnswerTests: omnitest(correctExpr='TEL4 <- read.csv("~/TEL4.txt", sep=";")')
+  Hint: Rappelez vous des importations precedentes.
+
+- Class: cmd_question
+  Output: Comme avec les tables medicales, on va fusionner verticalement les 4 tables des donnees de satisfaction.
+  CorrectAnswer: SATISF <- rbind(TEL1,TEL2,TEL3,TEL4)
+  AnswerTests: omnitest(correctExpr='SATISF <- rbind(TEL1,TEL2,TEL3,TEL4)')
+  Hint: Rappelez vous des importations precedentes.
+
+- Class: text
+  Output: Remarquez qu'il y a 93 enregistrements. Cela veut dire que 2 personnnes n'ont pas pu etre recontactees par telephone ou ont decide de ne pas donner suite a l'enquete.
