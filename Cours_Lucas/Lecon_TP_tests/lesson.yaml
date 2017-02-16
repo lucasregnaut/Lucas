@@ -1,0 +1,16 @@
+- Class: meta
+  Course: Cours Lucas
+  Lesson: Lecon TP tests
+  Author: your name goes here
+  Type: Standard
+  Organization: your organization's name goes here
+  Version: 2.4.2
+
+- Class: text
+  Output: Dans cette lecon, nous allons revoir l'exemple de l'etude HERS du TD precedent. Le fichier "hersdata.xlsx" contient un extrait des donnees de cette etude.
+
+- Class: text
+  Output: Tout d'abord, charger le jeu de donnees dans R et le modifier pour qu'il ait la bonne structure (que les variables qualitatives soient bien reconnues comme Factor). Puis rajouter la variable IMC contenant l'indice de masse corporelle (en kg/m^2). Enfin, rajouter egalement la variable Cholesterol ayant deux valeurs, "Non" si la valeur des LDL est normale (ici, si elle est comprise entre 90 mg/dl et 158 mg/dl), et "Oui" sinon.
+
+- Class: text
+  Output: Effectuer le test le plus pertinent (au seuil de 5%) afin de repondre aux questions suivantes, en expliquant la demarche et en justifiant les choix d'analyse faits. Detaillez les etapes avec le type de test, le choix du test parmi les tests vus en cours, hypotheses de test, conditions de validite, statistique de test, region critique, resultat fourni par le logiciel, conclusion, interpretation.
