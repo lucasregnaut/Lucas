@@ -84,10 +84,12 @@ install_course(swc_path = file.path("D:/ISPED_S2/STG101_Projet_tutoré/My_Course"
 options(encoding = 'UTF-8')
 options(encoding = "native.enc")
 
-#R markdown :
-#knitr (pas besoin...)
-#création de variables
 
+#R markdown :
+#création de variables !
 
 #2e leçon
 swirlify("Lecon TD fusion", "Cours Lucas")
+
+#3e leçon
+swirlify("Lecon TP tests", "Cours Lucas")
