@@ -84,3 +84,148 @@
 
 - Class: text
   Output: Remarquez qu'il y a 93 enregistrements. Cela veut dire que 2 personnnes n'ont pas pu etre recontactees par telephone ou ont decide de ne pas donner suite a l'enquete.
+
+- Class: text
+  Output: Remarquez que les variables entre les deux tables sont differentes. Et si l'on veut faire correspondre les deux tables, il faudra utiliser l'identifiant commun des deux tables. Les donnees medicales et les donnees de satisfaction seront alors fusionnees horizontalement, grace a la fonction "merge".
+
+- Class: cmd_question
+  Output: C'est a vous ! On appellera le resultat "complete". Pour executer cette fonction, on entrera d'abord les 2 tables dans les 2 premiers champs. Puis on precisera le libelle de l'identifiant commun dans la premiere table et dans la deuxieme table. Et, optionnellement, on peut par exemple ajouter "all.x=TRUE" qui permet d'inclure les 2 enregistrements de MED qui n'ont pas de correspondant dans la table SATISF. Ainsi ces enregistrements apparaissent dans "complete" avec des donnees manquantes pour les variables de SATISF.
+  CorrectAnswer: complete <- merge(MED, SATISF, by.x="ID",by.y="IDENT",all.x=TRUE)
+  AnswerTests: omnitest(correctExpr='complete <- merge(MED, SATISF, by.x="ID",by.y="IDENT",all.x=TRUE)')
+  Hint: La synthaxe ressemblera a = complete <- merge(premiere table, deuxieme table, identifiant premiere table, identifiant deuxieme table, all.x)
+
+- Class: text
+  Output: Voyez les deux tables de donnees "motif" et "diag" qui stockent les thesaurus relatifs a ces variables.
+
+- Class: cmd_question
+  Output: Dans un premier temps, pour recuperer le libelle des diagnostics il faut associer le code diagnostic de la table MED (DIAG) au code diagnostic du thesaurus des diagnostic (code_diag). On nommera le resultat "urgence_diag" et ajoutera "all.x=TRUE".
+  CorrectAnswer: urgence_diag <- merge(MED, DIAG, by.x="DIAG",by.y="code_diag",all.x=TRUE)
+  AnswerTests: omnitest(correctExpr='urgence_diag <- merge(MED, DIAG, by.x="DIAG",by.y="code_diag",all.x=TRUE)')
+  Hint: Dans la meme logique que la question precedente, la reponse sera = urgence_diag <- merge(MED, DIAG, by.x="DIAG",by.y="code_diag",all.x=TRUE)
+
+- Class: text
+  Output: all.x= TRUE est obligatoire pour ne pas perdre les enregistrements de MED sans diagnostic renseigne. Et all.y= TRUE est a eviter pour ne pas inclure a tort des enregistrements quasi-vides, avec uniquement les code et libelle correspondants a des codes du thesaurus n'ont utilise dans MED.
+
+- Class: cmd_question
+  Output: On repart de cette nouvelle table pour lui associer le libelle des motifs. La nouvelle table s'appellera "urgence_diag_mot".
+  CorrectAnswer: urgence_diag_mot <- merge(urgence_diag, MOTIF, by.x="MOTIF",by.y="code_motif",all.x=TRUE)
+  AnswerTests: omnitest(correctExpr='urgence_diag_mot <- merge(urgence_diag, MOTIF, by.x="MOTIF",by.y="code_motif",all.x=TRUE)')
+  Hint: On ecrira ici = urgence_diag_mot <- merge(urgence_diag, MOTIF, by.x="MOTIF",by.y="code_motif",all.x=TRUE)
+
+- Class: cmd_question
+  Output: Dans cette table pour le service des urgences, on peut enlever les 2 premieres colonnes correspondant aux codes. Le resultat se nommera "urgence".
+  CorrectAnswer: urgence <- urgence_diag_mot[,-c(1,2)]
+  AnswerTests: omnitest(correctExpr='urgence <- urgence_diag_mot[,-c(1,2)]')
+  Hint: Peut-etre qu'il faut revoir la partie pour selectionner des lignes/colonnes. En attendant le resultat attendu est = urgence <- urgence_diag_mot[,-c(1,2)]
+
+- Class: text
+  Output: La table urgence contient 95 enregistrements et 26 variables, comme MED.
+
+- Class: text
+  Output: On va enfin creer un fichier avec les donnees d'urgence sous un format facilement exploitable, comme ".txt". On va exporter la table urgence dans un fichier texte delimite = write.table
+
+- Class: cmd_question
+  Output: On peut preciser le separateur (sep), et le caractere a utiliser pour separer la partie decimale de la partie entiere dans les nombres decimaux. Par defaut le nom des variables est inclu sur la premiere ligne avec "row.names = TRUE". Vous pouvez finir le travail !
+  CorrectAnswer: write.table(x=urgence, file="fich_urgence.txt",dec=",",sep=";")
+  AnswerTests: omnitest(correctExpr='write.table(x=urgence, file="fich_urgence.txt",dec=",",sep=";")')
+  Hint: Il faudra ecrire = write.table(x=urgence, file="fich_urgence.txt",dec=",",sep=";")
+
+- Class: text
+  Output: La table "HTA_MED" contient des donnees avec le detail des traitements pris par chaque enquete. La structure de ce fichier est tres proche de celle du formulaire mis en place sur Voozanoo. On a le type de medicaments (1=inhibiteur de l'Ace, 2=diuretique, 3=B-bloquant, 4=calcium antagoniste, 5=antihypertenseur central, 6=autre traitement antihypertenseur, 7=traitement traditionnel) et la date de debut et de fin de traitement ainsi que l'identifiant du patient concerne par le traitement. On souhaite utiliser R, a partir des donnees de cette table et de la table "HTA2", pour repondre aux questions suivantes.
+
+- Class: cmd_question
+  Output: On veut savoir la duree moyenne de prise de l'ensemble des medicaments. Pour cela on a besoin de convertir les variables TRAIT_DEB et TRAIT_FIN en format Date (elles sont en format Factor). On va alors utiliser la fonction "transform" dans la table "HTA_MED".
+  CorrectAnswer: HTA_MED <- transform(HTA_MED, TRAIT_FIN=as.Date(TRAIT_FIN), TRAIT_DEB=as.Date(TRAIT_DEB))
+  AnswerTests: omnitest(correctExpr='HTA_MED <- transform(HTA_MED, TRAIT_FIN=as.Date(TRAIT_FIN), TRAIT_DEB=as.Date(TRAIT_DEB))')
+  Hint: Ici, il faut taper "HTA_MED <- transform(HTA_MED, TRAIT_FIN=as.Date(TRAIT_FIN), TRAIT_DEB=as.Date(TRAIT_DEB))"
+
+- Class: cmd_question
+  Output: Dans un premier temps, il faudrait creer une variable "TRAIT_DUR" egale a la difference entre "TRAIT_FIN" et "TRAIT_DEB".
+  CorrectAnswer: HTA_MED$TRAIT_DUR <- HTA_MED$TRAIT_FIN-HTA_MED$TRAIT_DEB
+  AnswerTests: omnitest(correctExpr='HTA_MED$TRAIT_DUR <- HTA_MED$TRAIT_FIN-HTA_MED$TRAIT_DEB')
+  Hint: Il faut mettre "HTA_MED$TRAIT_DUR <- HTA_MED$TRAIT_FIN-HTA_MED$TRAIT_DEB"
+
+- Class: cmd_question
+  Output: Pour ensuite calculer la moyenne de "TRAIT_DUR".
+  CorrectAnswer: mean(HTA_MED$TRAIT_DUR,na.rm=TRUE)
+  AnswerTests: omnitest(correctExpr='mean(HTA_MED$TRAIT_DUR,na.rm=TRUE)')
+  Hint: Attention, il ne faut pas oublier de preciser "na.rm=TRUE".
+
+- Class: text
+  Output: En plus des donnees sur les medicaments, on doit pouvoir savoir si ce sont des femmes qui les prennent. Ainsi, on aura besoin de la table "HTA2", qui a une structure differente par rapport a "HTA_MED".
+
+- Class: cmd_question
+  Output: Il y aura donc besoin de faire une fusion horizontale (ou une jointure) en faisant correspondre les enregistrements grace a l'IDNUM. On appellera le resultat de cette jointure "Q2" (parce que nous sommes a la question 2).
+  CorrectAnswer: Q2 <- merge(HTA2,HTA_MED)
+  AnswerTests: omnitest(correctExpr='Q2 <- merge(HTA2,HTA_MED)')
+  Hint: L'identifiant en commun a le meme libelle dans les tables. Il y a donc seulement besoin d'ecrire "Q2 <- merge(HTA2,HTA_MED)".
+
+- Class: cmd_question
+  Output: On remarque qu'il y a un enregitrement en trop (70 enregistrements au lieu des 69 de HTA_MED). Peut-etre qu'il y a un doublon de l'IDNUM dans HTA2. Pouvez-vous verifier ca ?
+  CorrectAnswer: max(table(HTA2$IDNUM))
+  AnswerTests: omnitest(correctExpr='max(table(HTA2$IDNUM))')
+  Hint: On rappelle la fonction qui nous permettait de trouver les doublons "max(table(HTA2$IDNUM))"
+
+- Class: cmd_question
+  Output: Et oui ! Un IDNUM apparait 2 fois. Quelle commande devont-nous faire pour retrouver ce doublon ? Commencez par appeler une variable "x" qui contient les regroupements des IDNUM de la table HTA2.
+  CorrectAnswer: x <- table(HTA2$IDNUM)
+  AnswerTests: omnitest(correctExpr='x <- table(HTA2$IDNUM)')
+  Hint: Vous vous souvenez de la fonction "table" ? Essayez avec "x <- table(HTA2$IDNUM)"
+
+- Class: cmd_question
+  Output: Maintenant on extrait les IDNUM qui ont un total superieur a 1 (la principale caracteristique d'un doublon).
+  CorrectAnswer: x[x>1]
+  AnswerTests: omnitest(correctExpr='x[x>1]')
+  Hint: Pour extraire des enregistrements dans un tableau, donc pour faire une requete, on utilise les crochets comme cela "x[x>1]".
+
+- Class: cmd_question
+  Output: Le doublon est un homme donc on n'a pas besoin de le supprimer de la base. Enfin, calculons la moyenne de la duree des traitements pris par des femmes.
+  CorrectAnswer: mean(Q2$TRAIT_DUR[Q2$SEXE==0],na.rm=TRUE)
+  AnswerTests: omnitest(correctExpr='mean(Q2$TRAIT_DUR[Q2$SEXE==0],na.rm=TRUE)')
+  Hint: On tapera "mean(Q2$TRAIT_DUR[Q2$SEXE==0],na.rm=TRUE)".
+
+- Class: cmd_question
+  Output: On va essayer avec une fonction deja vue pour extraire des enregistrements, je veux bien sur parler de "subset". On appellera le resultat "Q2_2". A vous !
+  CorrectAnswer: Q2_2 <- subset(Q2, SEXE==0)
+  AnswerTests: omnitest(correctExpr='Q2_2 <- subset(Q2, SEXE==0)')
+  Hint: Pour rappel, la fonction "subset" contient le nom de la table et la condition posee (ici on veut les femmes).
+
+- Class: cmd_question
+  Output: Et la moyenne ?
+  CorrectAnswer: mean(Q2_2$TRAIT_DUR,na.rm=TRUE)
+  AnswerTests: omnitest(correctExpr='mean(Q2_2$TRAIT_DUR,na.rm=TRUE)')
+  Hint: Peut-etre que vous avez oublie de mettre "na.rm=TRUE".
+
+- Class: text
+  Output: Question suivante ! Pour chaque personne, quel est le nombre de medicaments signales ? On veut dans un premier temps n'afficher ce nombre que pour les personnes qui prennent un traitement.
+
+- Class: cmd_question
+  Output: Pour avoir ce nombre, il suffit de compter le nombre d'apparition de chaque identifiant dans HTA_MED ou Q2.
+  CorrectAnswer: table(Q2$IDNUM)
+  AnswerTests: omnitest(correctExpr='table(Q2$IDNUM)')
+  Hint: On a deja utilise la fonction "table" il n'y a pas longtemps. Essayez "table(Q2$IDNUM)".
+
+- Class: cmd_question
+  Output: Un peu plus difficile, on veut avoir des 0 pour les personnes sans traitement. Pour cela on va commencer par faire une jointure externe entre HTA2 et HTA_MED, en specifiant "all=TRUE". Le resultat s'appellera "Q3".
+  CorrectAnswer: Q3 <- merge(HTA2,HTA_MED,all=TRUE)
+  AnswerTests: omnitest(correctExpr='Q3 <- merge(HTA2,HTA_MED,all=TRUE)')
+  Hint: On utilisera ici "Q3 <- merge(HTA2,HTA_MED,all=TRUE)".
+
+- Class: cmd_question
+  Output: Puis nous allons definir une variable TRAITE egale a 1 si la valeur de TRAIT est superieure ou egale a 1 (donc quand le patient prend un traitement).
+  CorrectAnswer: Q3$TRAITE[Q3$TRAIT>=1] <-1
+  AnswerTests: omnitest(correctExpr='Q3$TRAITE[Q3$TRAIT>=1] <-1')
+  Hint: N'hesitez pas a revoir la creation de variable. Ici on fera "Q3$TRAITE[Q3$TRAIT>=1] <-1".
+
+- Class: cmd_question
+  Output: Enfin, on utilise la fonction "table", en croisant les valeurs de IDNUM et de TRAITE.
+  CorrectAnswer: table(Q3$IDNUM,Q3$TRAITE)
+  AnswerTests: omnitest(correctExpr='table(Q3$IDNUM,Q3$TRAITE)')
+  Hint: Cette fonction "table" contiendra "Q3$IDNUM" et "Q3$TRAITE".
+
+
+- Class: cmd_question
+  Output: On y ai presque ! On va maintenant calculer la moyenne d'age des personnes hypertendues. On travaillera plutot sur HTA2, pour ne pas prendre en compte plusieurs fois les personnes qui ont plusieurs traitements.
+  CorrectAnswer: mean(HTA2$AGE[HTA2$HTACONNU==1],na.rm=TRUE)
+  AnswerTests: omnitest(correctExpr='mean(HTA2$AGE[HTA2$HTACONNU==1],na.rm=TRUE)')
+  Hint: La bonne reponse est "mean(HTA2$AGE[HTA2$HTACONNU==1],na.rm=TRUE)".
