@@ -14,3 +14,93 @@
 
 - Class: text
   Output: Effectuer le test le plus pertinent (au seuil de 5%) afin de repondre aux questions suivantes, en expliquant la demarche et en justifiant les choix d'analyse faits. Detaillez les etapes avec le type de test, le choix du test parmi les tests vus en cours, hypotheses de test, conditions de validite, statistique de test, region critique, resultat fourni par le logiciel, conclusion, interpretation.
+
+- Class: cmd_question
+  Output: On sait que dans la population generale, la pression arterielle systolique (PAS) moyenne est de 130 mmHg. L'echantillon de l'etude HERS est-il representatif de la population generale en terme de PAS ? Pour repondre a cette question, il faudra dans un premier temps selectionner uniquement les femmes qui ne sont pas sous traitement contre l'hypertension (c'est a dire que la variable "htnmeds" est egal a 0). On appellera le resultat "non_hypertendue".
+  CorrectAnswer: non_hypertendue<-subset(hersdata,htnmeds==0)
+  AnswerTests: omnitest(correctExpr='non_hypertendue<-subset(hersdata,htnmeds==0)')
+  Hint: Vous vous souvenez de la fonction "subset" ? Esssayez "non_hypertendue<-subset(hersdata,htnmeds==0)"
+
+- Class: cmd_question
+  Output: On veut ici comparer une moyenne observee a une moyenne theorique. Quelle commande allez-vous realiser pour faire le test ? On nommera le resultat "Q1".
+  CorrectAnswer: Q1<-t.test(non_hypertendue$SBP,mu=130)
+  AnswerTests: omnitest(correctExpr='Q1<-t.test(non_hypertendue$SBP,mu=130)')
+  Hint: On utilisera la fonction "t.test", en l'appliquant sur la variable SBP. On specifiera aussi "mu=130".
+
+- Class: cmd_question
+  Output: On veut savoir si on rejette ou pas l'hypothese nulle H0, pour cela on veut comparer la statistique de test au quantile de la loi normale (1.96). Comment peut-on recuperer cette statistique de test ?
+  CorrectAnswer: Q1$statistic
+  AnswerTests: omnitest(correctExpr='Q1$statistic')
+  Hint: Il faudra ecrire "Q1" puis "$" pour chercher la statistique de test.
+
+- Class: cmd_question
+  Output: Deuxieme question. On cherche a savoir s'il existe un lien entre le statut tabagique et la sante percue. Le test sera stocke dans la variable "Q2".
+  CorrectAnswer: Q2<-chisq.test(hersdata$smoking,hersdata$globrat)
+  AnswerTests: omnitest(correctExpr='Q2<-chisq.test(hersdata$smoking,hersdata$globrat)')
+  Hint: Pour faire un test du chi-deux d'independance, on utilisera la fonction "chisq.test" en precisant les deux variables ou on recherche un potentiel lien.
+
+- Class: cmd_question
+  Output: Tres bien ! Et si on souhaite afficher le tableau des effectifs observes ?
+  CorrectAnswer: Q2$observed
+  AnswerTests: omnitest(correctExpr='Q2$observed')
+  Hint: Il faut suivre la demarche que lorsqu'on a extrait la statistique de test, c'est a dire utiliser le "$".
+
+- Class: text
+  Output: Remarquez que pour avoir les effectifs theoriques, il faudra taper "Q2$expected".
+
+- Class: cmd_question
+  Output: Troisieme question. Existe-t-il un lien entre l'IMC et avoir du cholesterol ? La variable sera "Q3". Attention on a 1 variable quantitative et 1 variable qualitative.
+  CorrectAnswer: Q3<-t.test(hersdata$IMC~hersdata$Cholesterol)
+  AnswerTests: omnitest(correctExpr='Q3<-t.test(hersdata$IMC~hersdata$Cholesterol)')
+  Hint: Dans on utilisera la synthaxe suivante dans le t.test "variable quantitative ~ variable qualitative".
+
+- Class: cmd_question
+  Output: On sait que dans la population generale, un quart des femmes sont des fumeuses. L'echantillon de l'etude HERS est-il representatif de la population generale en terme de statut tabagique ?
+  CorrectAnswer: chisq.test(table(hersdata$smoking),p=c(0.25,0.75))
+  AnswerTests: omnitest(correctExpr='chisq.test(table(hersdata$smoking),p=c(0.25,0.75))')
+  Hint: Pour utiliser un test du chi-deux d'ajustement il faut renseigner les pourcentages comme ainsi "chisq.test(table(hersdata$smoking),p=c(0.25,0.75))".
+
+- Class: cmd_question
+  Output: Existe-t-il un lien entre avoir du cholesterol et le statut tabagique chez les femmes ayant une excellente sante percue ? (Il faudra donc extraire les femmes ayant une excellente sante percue, une extraction stockee dans "excellente_sante").
+  CorrectAnswer: excellente_sante=subset(hersdata,globrat==5)
+  AnswerTests: omnitest(correctExpr='excellente_sante=subset(hersdata,globrat==5)')
+  Hint: On tapera "excellente_sante=subset(hersdata,globrat==5)".
+
+- Class: cmd_question
+  Output: Et le test correspondant ?
+  CorrectAnswer: chisq.test(excellente_sante$Cholesterol,excellente_sante$smoking)
+  AnswerTests: omnitest(correctExpr='chisq.test(excellente_sante$Cholesterol,excellente_sante$smoking)')
+  Hint: On utilisera "chisq.test(excellente_sante$Cholesterol,excellente_sante$smoking)".
+
+- Class: text
+  Output: Notez qu'on a utilise ici le test du chi-deux corrige de Yates (un des effectifs theoriques etant inferieur a 5).
+
+- Class: cmd_question
+  Output: Question suivante. Existe-t-il un lien entre avoir du cholesterol et etre sous traitement THS ? [Verifier bien que R fait le test adapte (et non une variante) ici]
+  CorrectAnswer: chisq.test(hersdata$Cholesterol,hersdata$htnmeds,correct=F)
+  AnswerTests: omnitest(correctExpr='chisq.test(hersdata$Cholesterol,hersdata$htnmeds,correct=F)')
+  Hint: On realisera un "chisq.test" et on ajoutera "correct=F" dans les arguments.
+
+- Class: cmd_question
+  Output: Existe-t-il un lien entre etre sous traitement contre l'hypertension et le statut tabagique chez les femmes ayant une mauvaise sante percue ? Commencons par extraire les femmes ayant une mauvaise sante percue dans "mauvaise_sante".
+  CorrectAnswer: mauvaise_sante=subset(hersdata,globrat==1)
+  AnswerTests: omnitest(correctExpr='mauvaise_sante=subset(hersdata,globrat==1)')
+  Hint: On executera "mauvaise_sante=subset(hersdata,globrat==1)".
+
+- Class: cmd_question
+  Output: Maintenant passons au test !
+  CorrectAnswer: chisq.test(mauvaise_sante$htnmeds,mauvaise_sante$smoking)
+  AnswerTests: omnitest(correctExpr='chisq.test(mauvaise_sante$htnmeds,mauvaise_sante$smoking)')
+  Hint: Vous pouvez reprendre la meme synthaxe qu'avec les femmes ayant une excellente sante percue.
+
+- Class: cmd_question
+  Output: Existe-t-il un lien entre etre sous traitement contre l'hypertension et le glucose chez les femmes ayant une mauvaise sante percue ?
+  CorrectAnswer: t.test(mauvaise_sante$glucose~mauvaise_sante$htnmeds)
+  AnswerTests: omnitest(correctExpr='t.test(mauvaise_sante$glucose~mauvaise_sante$htnmeds)')
+  Hint: On a une variable quantitative et une variable qualitative...
+
+- Class: cmd_question
+  Output: Enfin, la derniere question de la lecon dediee aux tests statistiques sur R ! Les variables IMC et statut tabagique sont-elles liees ?
+  CorrectAnswer: t.test(hersdata$IMC~hersdata$smoking)
+  AnswerTests: omnitest(correctExpr='t.test(hersdata$IMC~hersdata$smoking)')
+  Hint: On utilisera enfin "t.test(hersdata$IMC~hersdata$smoking)".
