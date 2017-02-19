@@ -1,0 +1,224 @@
+- Class: meta
+  Course: ENQ101
+  Lesson: Part1
+  Author: your name goes here
+  Type: Standard
+  Organization: your organization's name goes here
+  Version: 2.4.2
+
+- Class: text
+  Output: Bienvenue sur notre cours d'ENQ101 !
+
+- Class: text
+  Output: Voici la premiere partie de ce cours !
+
+- Class: cmd_question
+  Output: Question 1 R peut etre une calculatrice, ajoute 2 et 2
+  CorrectAnswer: 2+2
+  AnswerTests: omnitest(correctExpr='2 + 2')
+  Hint: il te suffit de taper '2+2'
+
+- Class: cmd_question
+  Output: Question 2 R peut etre une calculatrice, multiplie 5 par 2
+  CorrectAnswer: 5*2
+  AnswerTests: omnitest(correctExpr='5 * 2')
+  Hint: il te suffit de taper '5 * 2'
+
+- Class: cmd_question
+  Output: Question 3 R peut etre une calculatrice, combien fait 5 au carre
+  CorrectAnswer: 5^2
+  AnswerTests: omnitest(correctExpr='5^2')
+  Hint: il te suffit de taper '5^2'
+
+- Class: text
+  Output: Une autre maniere d'utiliser la puissance est l'operateur **.
+
+- Class: cmd_question
+  Output: Question 4 Essaie de faire le meme calcul que precedemment avec cet operateur
+  CorrectAnswer: 5**2
+  AnswerTests: omnitest(correctExpr='5**2')
+  Hint: il te suffit de taper '5**2'
+
+- Class: text
+  Output: Il est possible de faire des calcul plus long et complexe.
+
+- Class: cmd_question
+  Output: Question 5 Calcul (4-3)/(3-1)
+  CorrectAnswer: (4-3)/(3-1)
+  AnswerTests: omnitest(correctExpr='(4-3)/(3-1)')
+  Hint: il te suffit de taper '(4-3)/(3-1)'
+
+- Class: text
+  Output: Tu peux aussi utiliser des fonctions pour tes calculs. Pour les utiliser, tape le nom de ta fonction suivi des parenthese contenant le(s) parametre(s).
+
+- Class: text
+  Output: Par exemple il y a cos(x) qui donne le cosinus de x, sin(x) qui donne son sinus, sqrt(x) qui donne la racine caree de x...
+
+- Class: cmd_question
+  Output: Question 6 Entraine toi. Quel est le cosinus de 0 ?
+  CorrectAnswer: cos(0)
+  AnswerTests: omnitest(correctExpr='cos(0)')
+  Hint: il te suffit de taper 'cos(0)'
+
+- Class: text
+  Output: Les fonctions peuvent s'imbriquer les unes dans les autres...
+
+- Class: cmd_question
+  Output: Question 7 Entraine toi. Quelle est la racine du cosinus de 0 ?
+  CorrectAnswer: sqrt(cos(0))
+  AnswerTests: omnitest(correctExpr='sqrt(cos(0))')
+  Hint: il te suffit de taper 'sqrt(cos(0))'
+
+- Class: text
+  Output: Creation de variable et affectation de valeur
+
+- Class: cmd_question
+  Output: Question 8 Cree une variable res et affecte lui une valeur egale a 3
+  CorrectAnswer: res <- 3
+  AnswerTests: omnitest(correctExpr='res <- 3')
+  Hint: il te suffit de taper 'res <- 3'
+  
+- Class: text
+  Output: On peut desormais utiliser cette variable pour d'autres calculs
+
+- Class: cmd_question
+  Output: Question 9 multiplie par 5 ton resultat precedent et met le tout au carre
+  CorrectAnswer: (res * 5)^2
+  AnswerTests: omnitest(correctExpr='(res * 5)^2')
+  Hint: il te suffit de taper '(res * 5)^2'
+
+- Class: text
+  Output: On peut meme affecter le resultat de ta variable a un autre objet
+
+- Class: cmd_question
+  Output: Question 10 Affecte a l'objet res2 la valeur de res puissance 3
+  CorrectAnswer: res2 <- res^3
+  AnswerTests: omnitest(correctExpr='res2 <- res^3')
+  Hint: il te suffit de taper 'res2 <- res^3'
+
+- Class: text
+  Output: Vecteurs
+
+- Class: text
+  Output: Un vecteur est un objet mathematique contenant un certain nombre de valeurs. On l'ecrit de la maniere suivante X <- c(val1, val2, ...)
+
+- Class: cmd_question
+  Output: Question 11 Cree un vecteur X contenant les valeurs 1 2 3 4 et 5
+  CorrectAnswer: X <- c(1,2,3,4,5)
+  AnswerTests: omnitest(correctExpr='X <- c(1,2,3,4,5)')
+  Hint: il te suffit de taper 'X <- c(1,2,3,4,5)'
+
+- Class: mult_question
+  Output: Question 12 quelle est la taille de ce vecteur X ?
+  AnswerChoices: 0;1;2;3;4;5
+  CorrectAnswer: 5
+  AnswerTests: omnitest(correctVal='5')
+  Hint: un indice, sa taille correspond a sa nombre de valeurs
+
+- Class: text
+  Output: Operations sur les vecteurs 
+  
+
+- Class: cmd_question
+  Output: Question 13 muliplier X par 3.
+  CorrectAnswer: X*3
+  AnswerTests: omnitest(correctExpr='X*3')
+  Hint: il te suffit de taper 'X*3'
+  
+- Class: cmd_question
+  Output: Question 14 Afficher X.
+  CorrectAnswer: X
+  AnswerTests: omnitest(correctExpr='X')
+  Hint: il te suffit de taper 'X'
+  
+- Class: mult_question
+  Output: Question 15 Quel effet cela a-t-eu ?
+  AnswerChoices: Multiplier par 3 la taille du vecteur;Multiplier par 3 chaque valeur du vecteur;Multiplier par 3 la premiere valeur du vecteur
+  CorrectAnswer: Multiplier par 3 chaque valeur du vecteur
+  AnswerTests: omnitest(correctVal='Multiplier par 3 chaque valeur du vecteur')
+  Hint: un indice, Multiplier un vecteur par x revient a multiplier chacune de ses valeur par x
+
+- Class: text
+  Output: Il est possible d'aditionner/soustraire des vecteurs de meme taille
+  
+- Class: cmd_question
+  Output: Question 16 Calculer X + X.
+  CorrectAnswer: X + X
+  AnswerTests: omnitest(correctExpr='X + X')
+  Hint: il te suffit de taper 'X + X'
+  
+- Class: mult_question
+  Output: Question 17 Quel sera la taille du nouveau vecteur ?
+  AnswerChoices: La meme que les anciens vecteurs;La somme de celle des anciens vecteurs;
+  CorrectAnswer: La meme que les anciens vecteurs
+  AnswerTests: omnitest(correctVal='La meme que les anciens vecteurs')
+  Hint: un indice, en sommant 2 vecteurs, la taille reste la meme
+
+- Class: text
+  Output: Pour sommer 2 vecteurs, il est indispensable que leur taille soit la meme
+  
+- Class: text
+  Output: Quelques fonctions sur les vecteurs...
+  
+- Class: cmd_question
+  Output: Question 18 Donner la taille du vecteur X.
+  CorrectAnswer: length(X)
+  AnswerTests: omnitest(correctExpr='length(X)')
+  Hint: il te suffit de taper 'length(X)'
+  
+- Class: cmd_question
+  Output: Question 19 Donner la plus petite valeur du vecteur X.
+  CorrectAnswer: min(X)
+  AnswerTests: omnitest(correctExpr='min(X)')
+  Hint: il te suffit de taper 'min(X)'
+
+- Class: cmd_question
+  Output: Question 20 Donner la somme des valeurs du vecteur X.
+  CorrectAnswer: sum(X)
+  AnswerTests: omnitest(correctExpr='sum(X)')
+  Hint: il te suffit de taper 'sum(X)'
+  
+- Class: text
+  Output: Il existe d'autres fonctions sur les vecteurs, max(X), prod(X), mean(X), sort(X), sort(X,decreasing=TRUE)...
+
+- Class: text
+  Output: Importation de donnees
+
+- Class: cmd_question
+  Output: Question 21 Placez vous dans votre repertoire de travail 
+  CorrectAnswer: setwd("C:/Users/Yoann/Documents/Projet_tutore/ENQ101/Part1")
+  AnswerTests: omnitest(correctExpr='setwd("C:/Users/Yoann/Documents/Projet_tutore/ENQ101/Part1")')
+  Hint: il te suffit de taper 'setwd("C:/Users/Yoann/Documents/Projet_tutore/ENQ101/Part1")'
+  
+- Class: cmd_question
+  Output: Question 22 Importez les donnees du fichier HTA2.csv dans un objet que vous appelerez HTA2
+  CorrectAnswer: HTA2 <- read.csv2("HTA2.csv")
+  AnswerTests: omnitest(correctExpr='HTA2 <- read.csv2("HTA2.csv")')
+  Hint: il te suffit de taper 'HTA2 <- read.csv2("HTA2.csv")'
+  
+- Class: cmd_question
+  Output: Question 23 Visualisez ces donnees 
+  CorrectAnswer: View(HTA2)
+  AnswerTests: omnitest(correctExpr='View(HTA2)')
+  Hint: il te suffit de taper 'View(HTA2)'
+  
+- Class: text
+  Output: Maintenant pour travailler sur les donnees, il va falloir selectionner des variables, on ne peut pas travailler sur l'integralite du tableau en meme temps.
+
+- Class: cmd_question
+  Output: Question 24 Par exemple selectionnez l'age des individus 
+  CorrectAnswer: HTA2$AGE
+  AnswerTests: omnitest(correctExpr='HTA2$AGE')
+  Hint: il te suffit de taper 'HTA2$AGE'
+
+- Class: cmd_question
+  Output: Question 24 Vous pouvez maintenant exploitez ces donnes. Quel est la moyenne d'age des individus de cette etude ? 
+  CorrectAnswer: mean(HTA2$AGE)
+  AnswerTests: omnitest(correctExpr='mean(HTA2$AGE)')
+  Hint: il te suffit de taper 'mean(HTA2$AGE)'
+
+- Class: script
+  Output: Question 25 Cree une fonction donnant la nieme valeur de la suite de fibonacci
+  AnswerTests: test_fib()
+  Hint: ecrire la fonction de maniere recursive
+  Script : fib.R
