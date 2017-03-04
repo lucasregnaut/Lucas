@@ -56,3 +56,40 @@
   CorrectAnswer: "```{r echo=FALSE} hist(dataset$AGE) ```"
   AnswerTests: val_matches('```{r echo=FALSE} hist(dataset$AGE) ```')
   Hint: Il faut rentrer = "```{r echo=FALSE} hist(dataset$AGE) ```"
+
+- Class: cmd_question
+  Output: Enregistrez la moyenne des nombres entre 1 et 10 dans une variable x.
+  CorrectAnswer: x <- mean(1:10)
+  AnswerTests: var_is_a('numeric', 'x');omnitest(correctExpr = 'x <- mean(1:10)')
+  Hint: Il faut rentrer x <- mean(1:10)
+  
+- Class: cmd_question
+  Output: Faire un nuage de points des entiers de 1 a 10.
+  CorrectAnswer: plot(1:10)
+  AnswerTests: omnitest(correctExpr = 'plot(1:10)')
+  Hint: Essayez avec la fonction plot().
+  
+- Class: cmd_question
+  Output: Entrez une expression qui renvoie le nombre 4.
+  CorrectAnswer: 4
+  AnswerTests: omnitest(correctVal = 4)
+  Hint: Il y a différentes façons d'obtenir le nombre 4!
+  
+- Class: cmd_question
+  Output: Entrez une expression qui permet de créer un vecteur des entiers entre
+  1 et 10.
+  CorrectAnswer: 1:10
+  AnswerTests: any_of_exprs('1:10', 'seq(1, 10, 1)')
+  Hint: On peut utiliser ":" ou la fonction "seq()".
+  
+- Class: cmd_question
+  Output: Utilisez la fonction mean() pour trouver la moyenne d'un vecteur.
+  CorrectAnswer: mean(1:10)
+  AnswerTests: expr_uses_func('mean')
+  Hint: Utilisez la fonction mean avec n'importe quel vecteur numérique en argument.
+  
+- Class: text_question
+  Output: Quelle est la capitale du Chili ?
+  CorrectAnswer: Santiago
+  AnswerTests: val_matches('[S|s]antiago')
+  Hint: ça rime avec Zandiago.
