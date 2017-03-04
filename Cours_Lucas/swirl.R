@@ -93,3 +93,6 @@ swirlify("Lecon TD fusion", "Cours Lucas")
 
 #3e leçon
 swirlify("Lecon TP tests", "Cours Lucas")
+
+#4e leçon
+swirlify("Lecon exercice entrainement", "Cours Lucas")
