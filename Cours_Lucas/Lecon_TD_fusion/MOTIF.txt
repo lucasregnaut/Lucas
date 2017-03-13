@@ -1,0 +1,5 @@
+"code_motif";"motif_consult"
+1,00;"traumatisme ou agression par un agent extérieur"
+2,00;"problème médical"
+3,00;"douleur d'origine indéterminée"
+4,00;"autre"
