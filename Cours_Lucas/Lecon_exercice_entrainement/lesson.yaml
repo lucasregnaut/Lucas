@@ -1,0 +1,88 @@
+- Class: meta
+  Course: Cours Lucas
+  Lesson: Lecon exercice entrainement
+  Author: your name goes here
+  Type: Standard
+  Organization: your organization's name goes here
+  Version: 2.4.2
+
+- Class: text
+  Output: Dans cette derniere lecon, nous allons mettre en application les differentes notions et concepts abordes lors des lecons precedentes.
+
+- Class: cmd_question
+  Output: Avant de commencer, vous aurez besoin de charger le package epiDisplay.
+  CorrectAnswer: library(epiDisplay)
+  AnswerTests: omnitest(correctExpr='library(epiDisplay)')
+  Hint: Tapez ceci "library(epiDisplay)".
+
+- Class: cmd_question
+  Output: Remarquez les 3 tables de donnees (mci, mbf, enf), nous souhaitons les fusionner. Pour cela, vous pouvez tout d'abord fusionner verticalement les tables "mci" et "mbf" en l'appelant "ci_bf".
+  CorrectAnswer: ci_bf=rbind(mci,mbf)
+  AnswerTests: omnitest(correctExpr='ci_bf=rbind(mci,mbf)')
+  Hint: En admettant que les 2 premieres tables s'appellent "mci" et "mbf", on peut essayer la commande "ci_bf=rbind(mci,mbf)".
+
+- Class: cmd_question
+  Output: Maintenant on peut finaliser la fusion avec le resultat precedent et "enf" en creant la table "complete". Attention ! On fera ici une fusion horizontale.
+  CorrectAnswer: complete=merge(enf,ci_bf,by.x = "ID_MERE",by.y = "ID",all.x = T)
+  AnswerTests: omnitest(correctExpr='complete=merge(enf,ci_bf,by.x = "ID_MERE",by.y = "ID",all.x = T)')
+  Hint: Rappelez-vous de la synthaxe de la fonction merge. On dit en premier les 2 tables qu'on veut fusionner, puis on dit les cles qui serviront de jointure, enfin on precise "all.x=TRUE".
+
+- Class: cmd_question
+  Output: Il est tout de meme possible d'avoir des meres qui ont plusieurs enfants. Celles-ci peuvent fausser les resultats. Nous allons les retrouver en selectionnant les meres ayant plus d'un enfant. Pour faire ca, on va d'abord compter le nombre d'indentifiant ID_MERE. Vous avez une idee ?
+  CorrectAnswer: complete$ID_MERE[table(complete$ID_MERE)>1]
+  AnswerTests: omnitest(correctExpr='complete$ID_MERE[table(complete$ID_MERE)>1]')
+  Hint: Une technique possible est d'utiliser "complete$ID_MERE[table(complete$ID_MERE)>1]".
+
+- Class: cmd_question
+  Output: Question suivante. Est-il possible de creer une variable qui represente la classe du niveau d'instruction. On aura par exemple "pas d'instruction", "primaire", "secondaire", "secondaire termine" et "etudes superieures". Meme s'il y a differentes manieres d'obtenir ce resultat, nous allons utiliser ici la fonction ifelse dans transform, et la nouvelle variable se nommera "CLAS_NIVINSTRUC".
+  CorrectAnswer: complete=transform(complete,CLAS_NIVINSTRUC=ifelse(NIVINSTRUC<1,"pas d'instruction",ifelse(NIVINSTRUC<7,"primaire",ifelse(NIVINSTRUC<12,"secondaire",ifelse(NIVINSTRUC<13,"secondaire termine","etudes superieures")))))
+  AnswerTests: omnitest(correctExpr='complete=transform(complete,CLAS_NIVINSTRUC=ifelse(NIVINSTRUC<1,"pas d'instruction",ifelse(NIVINSTRUC<7,"primaire",ifelse(NIVINSTRUC<12,"secondaire",ifelse(NIVINSTRUC<13,"secondaire termine","etudes superieures")))))')
+  Hint: Ce n'etait pas facile ! La reponse attendue est "complete=transform(complete,CLAS_NIVINSTRUC=ifelse(NIVINSTRUC<1,"pas d'instruction",ifelse(NIVINSTRUC<7,"primaire",ifelse(NIVINSTRUC<12,"secondaire",ifelse(NIVINSTRUC<13,"secondaire termine","etudes superieures")))))".
+
+- Class: cmd_question
+  Output: Pour finaliser la creation de la variable, nous allons la definir en tant que Factor. Cette fois-ci, on n'utilisera pas la fonction transform.
+  CorrectAnswer: complete$CLAS_NIVINSTRUC=as.factor(complete$CLAS_NIVINSTRUC)
+  AnswerTests: omnitest(correctExpr='complete$CLAS_NIVINSTRUC=as.factor(complete$CLAS_NIVINSTRUC)')
+  Hint: La reponse attendue est "complete$CLAS_NIVINSTRUC=as.factor(complete$CLAS_NIVINSTRUC)".
+
+- Class: cmd_question
+  Output: Enfin, pouvez-vous executer une commande, grace au package epiDisplay, qui permette de decrire la distribution de la nouvelle variable.
+  CorrectAnswer: tab1(complete$CLAS_NIVINSTRUC)
+  AnswerTests: omnitest(correctExpr='tab1(complete$CLAS_NIVINSTRUC)')
+  Hint: On utilisera ici simplement la fonction "tab1".
+
+- Class: cmd_question
+  Output: On souhaite maintenant etudier le lien entre le statut VIH et le groupe de traitement. Comme dans toute analyse, il faut attention aux donnees qui peuvent fausser les resultats comme les donnees manquantes ou valeurs aberrantes. Comment supprimer les statuts VIH inconnus dans le jeu de donnees (ceux avec STATUTVIH=9) ? La nouvelle table s'appellera "complete_connu".
+  CorrectAnswer: complete_connu=complete[complete$STATUTVIH!=9,]
+  AnswerTests: omnitest(correctExpr='complete_connu=complete[complete$STATUTVIH!=9,]')
+  Hint: La reponse ici est "complete_connu=complete[complete$STATUTVIH!=9,]" meme le resultat suivznt convient aussi "complete_connu=complete[complete$STATUTVIH==0 | complete$STATUTVIH==1,]".
+
+- Class: cmd_question
+  Output: Quelle fonction vue dans une lecon ulterieure permet d'etudier le lien entre 2 variables qualitatives ?
+  CorrectAnswer: tabpct(complete_connu$STATUTVIH,complete_connu$TTTGRP)
+  AnswerTests: omnitest(correctExpr='tabpct(complete_connu$STATUTVIH,complete_connu$TTTGRP)')
+  Hint: La fonction en question est bien sur "tabpct" du package epiDisplay.
+
+- Class: text
+  Output: Si vous lisez le tableau profil colonnes ("table.column.percent"), vous pouvez par exemple voir que, parmi les enfants traites sous AZT, 21.1% sont infectes par le VIH. Ou que, parmi les enfants sous placebo, 29.6% sont infectes par le VIH.
+
+- Class: cmd_question
+  Output: Maintenant on veut etudier la variable CD4VAL en tant que variable qualitative. Pour repondre a cette question, nous allons creer des sequences grace a la fonction "cut". On definiera les classes "inferieur ou egal a 200", "compris entre 200 et 500" et "superieur a 500". La nouvelle variable s'appellera CLAS_CD4.
+  CorrectAnswer: complete$CLAS_CD4=cut(complete$CD4VAL,breaks = c(0,200,500,2000),labels = c("inferieur ou egal a 200","compris entre 200 et 500","superieur a 500"))
+  AnswerTests: omnitest(correctExpr='complete$CLAS_CD4=cut(complete$CD4VAL,breaks = c(0,200,500,2000),labels = c("inferieur ou egal a 200","compris entre 200 et 500","superieur a 500"))')
+  Hint: Il faudra taper "complete$CLAS_CD4=cut(complete$CD4VAL,breaks = c(0,200,500,2000),labels = c("inferieur ou egal a 200","compris entre 200 et 500","superieur a 500"))".
+
+- Class: cmd_question
+  Output: Avant de repondre a la derniere question, on va creer une variable PRIMIPARE qui prend la valeur "oui" si PARITE est egal a 0, et "non" sinon. On utilisera la fonction "transform".
+  CorrectAnswer: complete=transform(complete,PRIMIPARE=ifelse(PARITE==0,"oui","non"))
+  AnswerTests: omnitest(correctExpr='complete=transform(complete,PRIMIPARE=ifelse(PARITE==0,"oui","non"))')
+  Hint: Et dans cette fonction "transform" on utilisera la fonction "ifelse" pour donner les valeurs "oui" ou "non".
+
+- Class: cmd_question
+  Output: Dans une nouvelle table "complete_export", on va extraire les enregistrements ayant entre 19 et 31 ans, de niveau primaire ou secondaire, en selectionnant seulement les variables "ID_MERE", "CLAS_CD4", "PRIMIPARE", "AGEINC" et "CLAS_NIVINSTRUC".
+  CorrectAnswer: complete_export=subset(complete,subset = (AGEINC>19 & AGEINC<31) & (CLAS_NIVINSTRUC=="primaire" | CLAS_NIVINSTRUC=="secondaire"),select = c("ID_MERE","CLAS_CD4","PRIMIPARE","AGEINC","CLAS_NIVINSTRUC"))
+  AnswerTests: omnitest(correctExpr='complete_export=subset(complete,subset = (AGEINC>19 & AGEINC<31) & (CLAS_NIVINSTRUC=="primaire" | CLAS_NIVINSTRUC=="secondaire"),select = c("ID_MERE","CLAS_CD4","PRIMIPARE","AGEINC","CLAS_NIVINSTRUC"))')
+  Hint: Cette derniere question etait assez difficile, la reponse etait "complete_export=subset(complete,subset = (AGEINC>19 & AGEINC<31) & (CLAS_NIVINSTRUC=="primaire" | CLAS_NIVINSTRUC=="secondaire"),select = c("ID_MERE","CLAS_CD4","PRIMIPARE","AGEINC","CLAS_NIVINSTRUC"))".
+
+- Class: text
+  Output: Felicitations, vous avez fini l'exercice d'entrainement ! N'hesitez pas a revoir les autres lecons pour etre pret pour le controle continu.
