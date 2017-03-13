@@ -69,11 +69,13 @@ find_questions("initiation") #dit le numéro de la/les question(s) où se trouvent
 
 #pour partager le cours (contenant la/les leçon(s))
 #à partir d'un fichier dans mes Documents
-set_lesson("My_Course/My_Lesson/lesson.yaml")
-pack_course(file.path("D:/ISPED_S2/STG101_Projet_tutoré/My_Course"))
-install_course(swc_path = file.path("D:/ISPED_S2/STG101_Projet_tutoré/My_Course","My_Course.swc"))
-#le cours sera mis par défaut dans le disque c
+set_lesson("Cours_Lucas/Lecon_TD_fusion/lesson.yaml")
+pack_course(file.path("D:/ISPED_S2/STG101_Projet_tutoré/Lucas"))
+install_course(swc_path = file.path("D:/ISPED_S2/STG101_Projet_tutoré/Lucas","Cours_test.swc"))
+#le cours (avec toutes les leçons) sera mis par défaut dans le disque c
 #on peut partager le cours en le mettant sur GitHub ou The Swirl Course Network
+install_course(swc_path = "https://github.com/lucasregnaut/scn/blob/gh-pages/Cours_Lucas.swc")
+#faux ?
 
 #si on veut récupérer la progression des étudiants (en tant que professeur)
 #on peut ajouter "swirl_options(swirl_logging = TRUE)" dans "initLesson.R"
@@ -96,3 +98,10 @@ swirlify("Lecon TP tests", "Cours Lucas")
 
 #4e leçon
 swirlify("Lecon exercice entrainement", "Cours Lucas")
+
+install.packages("devtools")
+devtools::install_github("swirldev/swirl", ref = "dev")
+library(swirl)
+
+library(devtools)
+install_github("swirldev/swirlify", ref = "dev")
