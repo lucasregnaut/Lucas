@@ -19,7 +19,7 @@
   Output: On sait que dans la population generale, la pression arterielle systolique (PAS) moyenne est de 130 mmHg. L'echantillon de l'etude HERS est-il representatif de la population generale en terme de PAS ? Pour repondre a cette question, il faudra dans un premier temps selectionner uniquement les femmes qui ne sont pas sous traitement contre l'hypertension (c'est a dire que la variable "htnmeds" est egal a 0). On appellera le resultat "non_hypertendue".
   CorrectAnswer: non_hypertendue<-subset(hersdata,htnmeds==0)
   AnswerTests: omnitest(correctExpr='non_hypertendue<-subset(hersdata,htnmeds==0)')
-  Hint: Vous vous souvenez de la fonction "subset" ? Esssayez "non_hypertendue<-subset(hersdata,htnmeds==0)"
+  Hint: Vous vous souvenez de la fonction "subset" ? Essayez "non_hypertendue<-subset(hersdata,htnmeds==0)"
 
 - Class: cmd_question
   Output: On veut ici comparer une moyenne observee a une moyenne theorique. Quelle commande allez-vous realiser pour faire le test ? On nommera le resultat "Q1".
@@ -52,7 +52,7 @@
   Output: Troisieme question. Existe-t-il un lien entre l'IMC et avoir du cholesterol ? La variable sera "Q3". Attention on a 1 variable quantitative et 1 variable qualitative.
   CorrectAnswer: Q3<-t.test(hersdata$IMC~hersdata$Cholesterol)
   AnswerTests: omnitest(correctExpr='Q3<-t.test(hersdata$IMC~hersdata$Cholesterol)')
-  Hint: Dans on utilisera la synthaxe suivante dans le t.test "variable quantitative ~ variable qualitative".
+  Hint: Dans on utilisera la syntaxe suivante dans le t.test "variable quantitative ~ variable qualitative".
 
 - Class: cmd_question
   Output: On sait que dans la population generale, un quart des femmes sont des fumeuses. L'echantillon de l'etude HERS est-il representatif de la population generale en terme de statut tabagique ?
@@ -91,7 +91,7 @@
   Output: Maintenant passons au test !
   CorrectAnswer: chisq.test(mauvaise_sante$htnmeds,mauvaise_sante$smoking)
   AnswerTests: omnitest(correctExpr='chisq.test(mauvaise_sante$htnmeds,mauvaise_sante$smoking)')
-  Hint: Vous pouvez reprendre la meme synthaxe qu'avec les femmes ayant une excellente sante percue.
+  Hint: Vous pouvez reprendre la meme syntaxe qu'avec les femmes ayant une excellente sante percue.
 
 - Class: cmd_question
   Output: Existe-t-il un lien entre etre sous traitement contre l'hypertension et le glucose chez les femmes ayant une mauvaise sante percue ?
