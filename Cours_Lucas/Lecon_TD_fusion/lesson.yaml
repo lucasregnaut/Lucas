@@ -11,40 +11,17 @@
   Output: Dans cet exercice, les donnees utilisees sont tirees d'une enquete ayant pour objectif de decrire la satisfaction des patients consultant un service des urgences adultes. Elle a concerne un echantillon de 95 sujets se presentant au service pour un motif ne necessitant pas d'hospitalisation.
 
 - Class: text
-  Output: Le recueil des donnees s'est effectue en deux temps. Tout d'abord, les sujets etaient inclus a la sortie de leur consultation. Le motif de consultation, le diagnostic, leurs age et sexe etaient recueillis ainsi que les soins recus et les examens complementaires faits. On notait aussi leur numero de telephone pour les contacter une semaine apres afin de les interroger plus precisemment sur leur satisfaction (le numero de telephone n'a apas ete saisi). La deuxieme partie du recueil se faisait donc lors d'un entretien telephonique. Plusieurs enqueteurs ont participe a ce travail = 4 etaient presents sur le site et 4 autres ont fait passer le questionnaire telephonique.
+  Output: Le recueil des donnees s'est effectue en deux temps. Tout d'abord, les sujets etaient inclus a la sortie de leur consultation. Le motif de consultation, le diagnostic, leurs age et sexe etaient recueillis ainsi que les soins recus et les examens complementaires faits. On notait aussi leur numero de telephone pour les contacter une semaine apres afin de les interroger plus precisemment sur leur satisfaction (le numero de telephone n'a apas ete saisi). La deuxieme partie du recueil se faisait donc lors d'un entretien telephonique. Plusieurs enqueteurs ont participe a ce travail. 4 etaient presents sur le site et 4 autres ont fait passer le questionnaire telephonique.
 
 - Class: text
-  Output: 8 tables de donnees ont ete alors crees = 4 concernant les donnees medicales des individus, ce sont les tables "terrain1" a "terrain4", et 4 concernant les variables de satisfaction, les tables "tel1" a "tel4".
+  Output: 8 tables de donnees ont ete alors crees. 4 concernant les donnees medicales des individus, ce sont les tables "terrain1" a "terrain4", et 4 concernant les variables de satisfaction, les tables "tel1" a "tel4".
+
 
 - Class: cmd_question
-  Output: Apres avoir specifie votre environnement de travail, importez dans R la premiere table "terrain". On l'appellera "TER1".
-  CorrectAnswer: TER1 <- read.csv("TERRAIN1.txt",sep=";")
-  AnswerTests: omnitest(correctExpr='TER1 <- read.csv("TERRAIN1.txt",sep=";")')
-  Hint: Il faut utiliser la fonction "read.csv"
-
-- Class: cmd_question
-  Output: Tres bien ! Maintenant importons la deuxieme table "TER2".
-  CorrectAnswer: TER2 <- read.csv("~/TERRAIN2.txt")
-  AnswerTests: omnitest(correctExpr='TER2 <- read.csv("~/TERRAIN2.txt")')
-  Hint: Il n'y a presque aucune difference par rapport a la question precedente.
-
-- Class: cmd_question
-  Output: Et la troisieme table "TER3".
-  CorrectAnswer: TER3 <- read.csv("~/TERRAIN3.txt")
-  AnswerTests: omnitest(correctExpr='TER3 <- read.csv("~/TERRAIN3.txt")')
-  Hint: Il n'y a presque aucune difference par rapport a la question precedente.
-
-- Class: cmd_question
-  Output: Enfin la quatrieme table "TER4".
-  CorrectAnswer: TER4 <- read.csv("~/TERRAIN4.txt")
-  AnswerTests: omnitest(correctExpr='TER4 <- read.csv("~/TERRAIN4.txt")')
-  Hint: Il n'y a presque aucune difference par rapport a la question precedente.
-
-- Class: cmd_question
-  Output: Les 4 tables medicales sont ajoutees ! On va alors les fusionner grace a la fonction "rbind". Le resultat sera enregistre dans une table "MED".
-  CorrectAnswer: MED <- rbind(TEL1,TEL2,TEL3,TEL4)
-  AnswerTests: omnitest(correctExpr='MED <- rbind(TEL1,TEL2,TEL3,TEL4)')
-  Hint: Essayez plutot avec "MED <- rbind(TEL1,TEL2,TEL3,TEL4)"
+  Output: Dans votre environnement de travail se trouve les 4 tables liees aux terrains. On va alors les fusionner grace a la fonction "rbind". Le resultat sera enregistre dans une table "MED".
+  CorrectAnswer: MED <- rbind(TER1,TER2,TER3,TER4)
+  AnswerTests: omnitest(correctExpr='MED <- rbind(TER1,TER2,TER3,TER4)')
+  Hint: Essayez plutot avec "MED <- rbind(TER1,TER2,TER3,TER4)"
 
 - Class: cmd_question
   Output: La table MED contient alors 95 enregistrements. On verifie bien qu'il n'y a pas de doublons d'identifiant. Vous pouvez verifier par exemple que le plus grand des effectifs associes aux valeurs de l'identifiant (ID) est bien 1.
@@ -52,32 +29,9 @@
   AnswerTests: omnitest(correctExpr='max(table(MED$ID))')
   Hint: Essayez avec "max(table(MED$ID))"
 
-- Class: cmd_question
-  Output: Apres les tables medicales, on va importer les tables satisfaction. Commencons par la premiere, nommee "TEL1".
-  CorrectAnswer: TEL1 <- read.csv("~/TEL1.txt", sep=";")
-  AnswerTests: omnitest(correctExpr='TEL1 <- read.csv("~/TEL1.txt", sep=";")')
-  Hint: Rappelez vous des importations precedentes.
 
 - Class: cmd_question
-  Output: Bien joue ! Puis la deuxieme table, nommee "TEL2".
-  CorrectAnswer: TEL2 <- read.csv("~/TEL2.txt", sep=";")
-  AnswerTests: omnitest(correctExpr='TEL2 <- read.csv("~/TEL2.txt", sep=";")')
-  Hint: Rappelez vous des importations precedentes.
-
-- Class: cmd_question
-  Output: Et la troisieme table, nommee "TEL3".
-  CorrectAnswer: TEL3 <- read.csv("~/TEL3.txt", sep=";")
-  AnswerTests: omnitest(correctExpr='TEL3 <- read.csv("~/TEL3.txt", sep=";")')
-  Hint: Rappelez vous des importations precedentes.
-
-- Class: cmd_question
-  Output: Enfin la quatrieme table, nommee "TEL4".
-  CorrectAnswer: TEL4 <- read.csv("~/TEL4.txt", sep=";")
-  AnswerTests: omnitest(correctExpr='TEL4 <- read.csv("~/TEL4.txt", sep=";")')
-  Hint: Rappelez vous des importations precedentes.
-
-- Class: cmd_question
-  Output: Comme avec les tables medicales, on va fusionner verticalement les 4 tables des donnees de satisfaction.
+  Output: Comme avec les tables medicales, on va fusionner verticalement les 4 tables des donnees de satisfaction. La table s'appellera "SATISF". 
   CorrectAnswer: SATISF <- rbind(TEL1,TEL2,TEL3,TEL4)
   AnswerTests: omnitest(correctExpr='SATISF <- rbind(TEL1,TEL2,TEL3,TEL4)')
   Hint: Rappelez vous des importations precedentes.
@@ -92,7 +46,7 @@
   Output: C'est a vous ! On appellera le resultat "complete". Pour executer cette fonction, on entrera d'abord les 2 tables dans les 2 premiers champs. Puis on precisera le libelle de l'identifiant commun dans la premiere table et dans la deuxieme table. Et, optionnellement, on peut par exemple ajouter "all.x=TRUE" qui permet d'inclure les 2 enregistrements de MED qui n'ont pas de correspondant dans la table SATISF. Ainsi ces enregistrements apparaissent dans "complete" avec des donnees manquantes pour les variables de SATISF.
   CorrectAnswer: complete <- merge(MED, SATISF, by.x="ID",by.y="IDENT",all.x=TRUE)
   AnswerTests: omnitest(correctExpr='complete <- merge(MED, SATISF, by.x="ID",by.y="IDENT",all.x=TRUE)')
-  Hint: La synthaxe ressemblera a = complete <- merge(premiere table, deuxieme table, identifiant premiere table, identifiant deuxieme table, all.x)
+  Hint: La syntaxe ressemblera a ceci = complete <- merge(premiere table, deuxieme table, identifiant premiere table, identifiant deuxieme table, all.x)
 
 - Class: text
   Output: Voyez les deux tables de donnees "motif" et "diag" qui stockent les thesaurus relatifs a ces variables.
