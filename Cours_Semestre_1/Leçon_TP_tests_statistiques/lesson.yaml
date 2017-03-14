@@ -16,6 +16,24 @@
   Output: Effectuer le test le plus pertinent (au seuil de 5%) afin de repondre aux questions suivantes, en expliquant la demarche et en justifiant les choix d'analyse faits. Detaillez les etapes avec le type de test, le choix du test parmi les tests vus en cours, hypotheses de test, conditions de validite, statistique de test, region critique, resultat fourni par le logiciel, conclusion, interpretation.
 
 - Class: cmd_question
+  Output: Tout d'abord, on va definir les variables "HT", "smoking", "globrat", "htnmeds" en tant que facteur. Et "weight" et "height" en variable numerique. Pour realiser cette operation d'un coup on peut utiliser la fonction "transform()".
+  CorrectAnswer: hersdata=transform(hersdata,HT=factor(HT),smoking=factor(smoking),globrat=factor(globrat),htnmeds=factor(htnmeds),weight=as.numeric(weight),height=as.numeric(height))
+  AnswerTests: omnitest(correctExpr='hersdata=transform(hersdata,HT=factor(HT),smoking=factor(smoking),globrat=factor(globrat),htnmeds=factor(htnmeds),weight=as.numeric(weight),height=as.numeric(height))')
+  Hint: La commande est assez longue "hersdata=transform(hersdata,HT=factor(HT),smoking=factor(smoking),globrat=factor(globrat),htnmeds=factor(htnmeds),weight=as.numeric(weight),height=as.numeric(height))".
+
+- Class: cmd_question
+  Output: Puis creer la variable "IMC" selon sa formule "poids(kg)/taille(m)^2". On utilisera cette fois-ci la methode avec le "$".
+  CorrectAnswer: hersdata$IMC=hersdata$weight/(hersdata$height/100)^2
+  AnswerTests: omnitest(correctExpr='hersdata$IMC=hersdata$weight/(hersdata$height/100)^2')
+  Hint: Attention ! Pour avoir la taille en metres, en la divisera par 100.
+
+- Class: cmd_question
+  Output: Et une variable "Cholesterol" qui prendra la valeur "non" si "LDL" est comprise entre 90 et 158, et "oui" sinon.
+  CorrectAnswer: hersdata$Cholesterol=ifelse(hersdata$LDL>=90 & hersdata$LDL<=158,yes="non",no="oui")
+  AnswerTests: omnitest(correctExpr='hersdata$Cholesterol=ifelse(hersdata$LDL>=90 & hersdata$LDL<=158,yes="non",no="oui")')
+  Hint: On peut par exemple utiliser la fonction "ifelse()".
+
+- Class: cmd_question
   Output: On sait que dans la population generale, la pression arterielle systolique (PAS) moyenne est de 130 mmHg. L'echantillon de l'etude HERS est-il representatif de la population generale en terme de PAS ? Pour repondre a cette question, il faudra dans un premier temps selectionner uniquement les femmes qui ne sont pas sous traitement contre l'hypertension (c'est a dire que la variable "htnmeds" est egal a 0). On appellera le resultat "non_hypertendue".
   CorrectAnswer: non_hypertendue<-subset(hersdata,htnmeds==0)
   AnswerTests: omnitest(correctExpr='non_hypertendue<-subset(hersdata,htnmeds==0)')

@@ -34,6 +34,12 @@
   Hint: Une technique possible est d'utiliser "complete$ID_MERE[table(complete$ID_MERE)>1]".
 
 - Class: cmd_question
+  Output: Avant de passer a la question suivante, est-ce que vous vous rappelez comment on definit une variable numerique ? Vous pouvez le faire pour la variable "NIVINSTRUC" (c'est un facteur a l'origine).
+  CorrectAnswer: complete$NIVINSTRUC=as.numeric(complete$NIVINSTRUC)
+  AnswerTests: omnitest(correctExpr='complete$NIVINSTRUC=as.numeric(complete$NIVINSTRUC)')
+  Hint: Il faudra ecrire "complete$NIVINSTRUC=as.numeric(complete$NIVINSTRUC)".
+
+- Class: cmd_question
   Output: Question suivante. Est-il possible de creer une variable qui represente la classe du niveau d'instruction. On aura par exemple "pas d'instruction", "primaire", "secondaire", "secondaire termine" et "etudes superieures". Meme s'il y a differentes manieres d'obtenir ce resultat, nous allons utiliser ici la fonction ifelse dans transform, et la nouvelle variable se nommera "CLAS_NIVINSTRUC".
   CorrectAnswer: complete=transform(complete,CLAS_NIVINSTRUC=ifelse(NIVINSTRUC<1,"pas d'instruction",ifelse(NIVINSTRUC<7,"primaire",ifelse(NIVINSTRUC<12,"secondaire",ifelse(NIVINSTRUC<13,"secondaire termine","etudes superieures")))))
   AnswerTests: omnitest(correctExpr='complete=transform(complete,CLAS_NIVINSTRUC=ifelse(NIVINSTRUC<1,"pas d'instruction",ifelse(NIVINSTRUC<7,"primaire",ifelse(NIVINSTRUC<12,"secondaire",ifelse(NIVINSTRUC<13,"secondaire termine","etudes superieures")))))')
