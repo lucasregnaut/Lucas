@@ -91,13 +91,13 @@ options(encoding = "native.enc")
 #création de variables !
 
 #2e leçon
-swirlify("Lecon TD fusion", "Cours Lucas")
+swirlify("Leçon_TD_fusion_des_données", "Cours_Lucas")
 
 #3e leçon
-swirlify("Lecon TP tests", "Cours Lucas")
+swirlify("Leçon_TP_tests_statistiques", "Cours_Lucas")
 
 #4e leçon
-swirlify("Lecon exercice entrainement", "Cours Lucas")
+swirlify("Entrainement_controle_continu", "Cours_Lucas")
 
 install.packages("devtools")
 devtools::install_github("swirldev/swirl", ref = "dev")
