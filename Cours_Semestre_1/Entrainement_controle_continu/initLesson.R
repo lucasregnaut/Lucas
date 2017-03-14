@@ -9,6 +9,6 @@
   )
 }
 
-mbf <- read.csv(file.path(.get_course_path(), "Cours_Lucas", "Lecon_exercice_entrainement", "mbf.txt"),sep = ";")
-mci <- read.csv(file.path(.get_course_path(), "Cours_Lucas", "Lecon_exercice_entrainement", "mci.txt"),sep = ";")
-enf <- read.csv(file.path(.get_course_path(), "Cours_Lucas", "Lecon_exercice_entrainement", "enf.txt"),sep = ";")
+mbf <- read.csv(file.path(.get_course_path(), "Cours_Semestre_1", "Entrainement_controle_continu", "mbf.txt"),sep = ";")
+mci <- read.csv(file.path(.get_course_path(), "Cours_Semestre_1", "Entrainement_controle_continu", "mci.txt"),sep = ";")
+enf <- read.csv(file.path(.get_course_path(), "Cours_Semestre_1", "Entrainement_controle_continu", "enf.txt"),sep = ";")

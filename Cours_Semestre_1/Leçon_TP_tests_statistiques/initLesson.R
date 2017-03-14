@@ -9,5 +9,5 @@
   )
 }
 
-hersdata <- read.csv(file.path(.get_course_path(), "Cours_Lucas", "Leçon_TP_tests_statistiques", "hersdata.csv"),sep = ";")
+hersdata <- read.csv(file.path(.get_course_path(), "Cours_Semestre_1", "Leçon_TP_tests_statistiques", "hersdata.csv"),sep = ";")
 View(hersdata)
