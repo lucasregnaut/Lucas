@@ -121,4 +121,4 @@
   Output: Enfin, la derniere question de la lecon dediee aux tests statistiques sur R ! Les variables IMC et statut tabagique sont-elles liees ?
   CorrectAnswer: t.test(hersdata$IMC~hersdata$smoking)
   AnswerTests: omnitest(correctExpr='t.test(hersdata$IMC~hersdata$smoking)')
-  Hint: On utilisera enfin "t.test(hersdata$IMC~hersdata$smoking)".
+  Hint: On utilisera "t.test(hersdata$IMC~hersdata$smoking)".
