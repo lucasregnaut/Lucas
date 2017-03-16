@@ -6,7 +6,7 @@ D'abord, installer et charger le package "swirl" :
 ```
 install.packages("swirl")
 
-library("swirl")
+library(swirl)
 ```
 
 Puis importer le cours disponible sur GitHub :
