@@ -183,3 +183,6 @@
   CorrectAnswer: mean(HTA2$AGE[HTA2$HTACONNU==1],na.rm=TRUE)
   AnswerTests: omnitest(correctExpr='mean(HTA2$AGE[HTA2$HTACONNU==1],na.rm=TRUE)')
   Hint: La bonne reponse est "mean(HTA2$AGE[HTA2$HTACONNU==1],na.rm=TRUE)".
+
+- Class: text
+  Output: La lecon portant sur la fusion des donnees est terminee !

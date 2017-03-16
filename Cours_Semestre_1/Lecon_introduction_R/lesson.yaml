@@ -1,6 +1,6 @@
 - Class: meta
   Course: ENQ101
-  Lesson: Part1
+  Lesson: Introduction R
   Author: your name goes here
   Type: Standard
   Organization: your organization's name goes here
@@ -40,10 +40,10 @@
   Hint: il te suffit de taper '5**2'
 
 - Class: text
-  Output: Il est possible de faire des calcul plus long et complexe.
+  Output: Il est possible de faire des calculs plus longs et complexes.
 
 - Class: cmd_question
-  Output: Question 5 Calcul (4-3)/(3-1)
+  Output: Question 5 Calcule (4-3)/(3-1)
   CorrectAnswer: (4-3)/(3-1)
   AnswerTests: omnitest(correctExpr='(4-3)/(3-1)')
   Hint: il te suffit de taper '(4-3)/(3-1)'
@@ -57,8 +57,8 @@
 - Class: cmd_question
   Output: Question 6 Entraine toi. Quel est le cosinus de 0 ?
   CorrectAnswer: cos(0)
-  AnswerTests: omnitest(correctExpr='cos(0)')
-  Hint: il te suffit de taper 'cos(0)'
+  AnswerTests: any_of_exprs('cos(0)','cos(x=0)')
+  Hint: il te suffit de taper 'cos(0)' ou cos(x=0)
 
 - Class: text
   Output: Les fonctions peuvent s'imbriquer les unes dans les autres...
@@ -66,14 +66,14 @@
 - Class: cmd_question
   Output: Question 7 Entraine toi. Quelle est la racine du cosinus de 0 ?
   CorrectAnswer: sqrt(cos(0))
-  AnswerTests: omnitest(correctExpr='sqrt(cos(0))')
-  Hint: il te suffit de taper 'sqrt(cos(0))'
+  AnswerTests: any_of_exprs('sqrt(cos(0))','sqrt(x=cos(x=0))')
+  Hint: il te suffit de taper 'sqrt(cos(0))' ou 'sqrt(x=cos(x=0))'
 
 - Class: text
   Output: Creation de variable et affectation de valeur
 
 - Class: cmd_question
-  Output: Question 8 Cree une variable res et affecte lui une valeur egale a 3
+  Output: Question 8 Cree une variable "res" et affecte lui une valeur egale a 3
   CorrectAnswer: res <- 3
   AnswerTests: omnitest(correctExpr='res <- 3')
   Hint: il te suffit de taper 'res <- 3'
@@ -82,7 +82,7 @@
   Output: On peut desormais utiliser cette variable pour d'autres calculs
 
 - Class: cmd_question
-  Output: Question 9 multiplie par 5 ton resultat precedent et met le tout au carre
+  Output: Question 9 Multiplie par 5 ton resultat precedent et met le tout au carre
   CorrectAnswer: (res * 5)^2
   AnswerTests: omnitest(correctExpr='(res * 5)^2')
   Hint: il te suffit de taper '(res * 5)^2'
@@ -109,18 +109,18 @@
   Hint: il te suffit de taper 'X <- c(1,2,3,4,5)'
 
 - Class: mult_question
-  Output: Question 12 quelle est la taille de ce vecteur X ?
+  Output: Question 12 Quelle est la taille de ce vecteur X ?
   AnswerChoices: 0;1;2;3;4;5
   CorrectAnswer: 5
   AnswerTests: omnitest(correctVal='5')
-  Hint: un indice, sa taille correspond a sa nombre de valeurs
+  Hint: Un indice, sa taille correspond a son nombre de valeurs
 
 - Class: text
   Output: Operations sur les vecteurs 
   
 
 - Class: cmd_question
-  Output: Question 13 muliplier X par 3.
+  Output: Question 13 Muliplier X par 3.
   CorrectAnswer: X*3
   AnswerTests: omnitest(correctExpr='X*3')
   Hint: il te suffit de taper 'X*3'
@@ -136,7 +136,7 @@
   AnswerChoices: Multiplier par 3 la taille du vecteur;Multiplier par 3 chaque valeur du vecteur;Multiplier par 3 la premiere valeur du vecteur
   CorrectAnswer: Multiplier par 3 chaque valeur du vecteur
   AnswerTests: omnitest(correctVal='Multiplier par 3 chaque valeur du vecteur')
-  Hint: un indice, Multiplier un vecteur par x revient a multiplier chacune de ses valeur par x
+  Hint: Un indice, multiplier un vecteur par x revient a multiplier chacune de ses valeur par x
 
 - Class: text
   Output: Il est possible d'aditionner/soustraire des vecteurs de meme taille
@@ -152,7 +152,7 @@
   AnswerChoices: La meme que les anciens vecteurs;La somme de celle des anciens vecteurs;
   CorrectAnswer: La meme que les anciens vecteurs
   AnswerTests: omnitest(correctVal='La meme que les anciens vecteurs')
-  Hint: un indice, en sommant 2 vecteurs, la taille reste la meme
+  Hint: Un indice, en sommant 2 vecteurs, la taille reste la meme
 
 - Class: text
   Output: Pour sommer 2 vecteurs, il est indispensable que leur taille soit la meme
@@ -212,7 +212,7 @@
   Hint: il te suffit de taper 'HTA2$AGE'
 
 - Class: cmd_question
-  Output: Question 24 Vous pouvez maintenant exploitez ces donnes. Quel est la moyenne d'age des individus de cette etude ? 
+  Output: Question 24 Vous pouvez maintenant exploitez ces donnees. Quel est la moyenne d'age des individus de cette etude ? 
   CorrectAnswer: mean(HTA2$AGE)
   AnswerTests: omnitest(correctExpr='mean(HTA2$AGE)')
   Hint: il te suffit de taper 'mean(HTA2$AGE)'
