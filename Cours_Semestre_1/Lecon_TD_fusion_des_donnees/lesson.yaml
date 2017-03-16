@@ -6,7 +6,6 @@
   Organization: your organization's name goes here
   Version: 2.4.2
 
-
 - Class: text
   Output: Dans cet exercice, les donnees utilisees sont tirees d'une enquete ayant pour objectif de decrire la satisfaction des patients consultant un service des urgences adultes. Elle a concerne un echantillon de 95 sujets se presentant au service pour un motif ne necessitant pas d'hospitalisation.
 
