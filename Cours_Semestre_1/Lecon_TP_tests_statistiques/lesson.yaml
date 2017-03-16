@@ -7,30 +7,27 @@
   Version: 2.4.2
 
 - Class: text
-  Output: Dans cette lecon, nous allons revoir l'exemple de l'etude HERS du TD precedent. Le fichier "hersdata.xlsx" contient un extrait des donnees de cette etude.
-
-- Class: text
-  Output: Tout d'abord, charger le jeu de donnees dans R et le modifier pour qu'il ait la bonne structure (que les variables qualitatives soient bien reconnues comme Factor). Puis rajouter la variable IMC contenant l'indice de masse corporelle (en kg/m^2). Enfin, rajouter egalement la variable Cholesterol ayant deux valeurs, "Non" si la valeur des LDL est normale (ici, si elle est comprise entre 90 mg/dl et 158 mg/dl), et "Oui" sinon.
+  Output: Dans cette lecon, nous allons revoir l'exemple de l'etude HERS du TD precedent. La table "hersdata" contient un extrait des donnees de cette etude.
 
 - Class: text
   Output: Effectuer le test le plus pertinent (au seuil de 5%) afin de repondre aux questions suivantes, en expliquant la demarche et en justifiant les choix d'analyse faits. Detaillez les etapes avec le type de test, le choix du test parmi les tests vus en cours, hypotheses de test, conditions de validite, statistique de test, region critique, resultat fourni par le logiciel, conclusion, interpretation.
 
 - Class: cmd_question
-  Output: Tout d'abord, on va definir les variables "HT", "smoking", "globrat", "htnmeds" en tant que facteur. Et "weight" et "height" en variable numerique. Pour realiser cette operation d'un coup on peut utiliser la fonction "transform()".
-  CorrectAnswer: hersdata=transform(hersdata,HT=factor(HT),smoking=factor(smoking),globrat=factor(globrat),htnmeds=factor(htnmeds),weight=as.numeric(weight),height=as.numeric(height))
-  AnswerTests: omnitest(correctExpr='hersdata=transform(hersdata,HT=factor(HT),smoking=factor(smoking),globrat=factor(globrat),htnmeds=factor(htnmeds),weight=as.numeric(weight),height=as.numeric(height))')
-  Hint: La commande est assez longue "hersdata=transform(hersdata,HT=factor(HT),smoking=factor(smoking),globrat=factor(globrat),htnmeds=factor(htnmeds),weight=as.numeric(weight),height=as.numeric(height))".
+  Output: Tout d'abord, on va definir les variables "HT", "smoking", "globrat", "htnmeds" en tant que facteur. Pour realiser cette operation d'un coup on peut utiliser la fonction "transform()".
+  CorrectAnswer: hersdata=transform(hersdata,HT=factor(HT),smoking=factor(smoking),globrat=factor(globrat),htnmeds=factor(htnmeds))
+  AnswerTests: omnitest(correctExpr='hersdata<-transform(hersdata,HT=factor(HT),smoking=factor(smoking),globrat=factor(globrat),htnmeds=factor(htnmeds))')
+  Hint: La commande est assez longue "hersdata<-transform(hersdata,HT=factor(HT),smoking=factor(smoking),globrat=factor(globrat),htnmeds=factor(htnmeds))".
 
 - Class: cmd_question
   Output: Puis creer la variable "IMC" selon sa formule "poids(kg)/taille(m)^2". On utilisera cette fois-ci la methode avec le "$".
   CorrectAnswer: hersdata$IMC=hersdata$weight/(hersdata$height/100)^2
-  AnswerTests: omnitest(correctExpr='hersdata$IMC=hersdata$weight/(hersdata$height/100)^2')
+  AnswerTests: omnitest(correctExpr='hersdata$IMC<-hersdata$weight/(hersdata$height/100)^2')
   Hint: Attention ! Pour avoir la taille en metres, en la divisera par 100.
 
 - Class: cmd_question
   Output: Et une variable "Cholesterol" qui prendra la valeur "non" si "LDL" est comprise entre 90 et 158, et "oui" sinon.
   CorrectAnswer: hersdata$Cholesterol=ifelse(hersdata$LDL>=90 & hersdata$LDL<=158,yes="non",no="oui")
-  AnswerTests: omnitest(correctExpr='hersdata$Cholesterol=ifelse(hersdata$LDL>=90 & hersdata$LDL<=158,yes="non",no="oui")')
+  AnswerTests: omnitest(correctExpr='hersdata$Cholesterol<-ifelse(hersdata$LDL>=90 & hersdata$LDL<=158,yes="non",no="oui")')
   Hint: On peut par exemple utiliser la fonction "ifelse()".
 
 - Class: cmd_question
@@ -50,6 +47,9 @@
   CorrectAnswer: Q1$statistic
   AnswerTests: omnitest(correctExpr='Q1$statistic')
   Hint: Il faudra ecrire "Q1" puis "$" pour chercher la statistique de test.
+
+- Class: text
+  Output: Dans ce cas, la statistique de test est superieur a 1.96, on rejette alors l'hypothese nulle (l'echantillon n'est pas representatif de la population generale en terme de PAS) au risque de premiere espece 5%.
 
 - Class: cmd_question
   Output: Deuxieme question. On cherche a savoir s'il existe un lien entre le statut tabagique et la sante percue. Le test sera stocke dans la variable "Q2".
@@ -80,9 +80,9 @@
 
 - Class: cmd_question
   Output: Existe-t-il un lien entre avoir du cholesterol et le statut tabagique chez les femmes ayant une excellente sante percue ? (Il faudra donc extraire les femmes ayant une excellente sante percue, une extraction stockee dans "excellente_sante").
-  CorrectAnswer: excellente_sante=subset(hersdata,globrat==5)
-  AnswerTests: omnitest(correctExpr='excellente_sante=subset(hersdata,globrat==5)')
-  Hint: On tapera "excellente_sante=subset(hersdata,globrat==5)".
+  CorrectAnswer: excellente_sante<-subset(hersdata,globrat==5)
+  AnswerTests: omnitest(correctExpr='excellente_sante<-subset(hersdata,globrat==5)')
+  Hint: On tapera "excellente_sante<-subset(hersdata,globrat==5)".
 
 - Class: cmd_question
   Output: Et le test correspondant ?
@@ -101,9 +101,9 @@
 
 - Class: cmd_question
   Output: Existe-t-il un lien entre etre sous traitement contre l'hypertension et le statut tabagique chez les femmes ayant une mauvaise sante percue ? Commencons par extraire les femmes ayant une mauvaise sante percue dans "mauvaise_sante".
-  CorrectAnswer: mauvaise_sante=subset(hersdata,globrat==1)
-  AnswerTests: omnitest(correctExpr='mauvaise_sante=subset(hersdata,globrat==1)')
-  Hint: On executera "mauvaise_sante=subset(hersdata,globrat==1)".
+  CorrectAnswer: mauvaise_sante<-subset(hersdata,globrat==1)
+  AnswerTests: omnitest(correctExpr='mauvaise_sante<-subset(hersdata,globrat==1)')
+  Hint: On executera "mauvaise_sante<-subset(hersdata,globrat==1)".
 
 - Class: cmd_question
   Output: Maintenant passons au test !
