@@ -185,19 +185,13 @@
   Output: Importation de donnees
 
 - Class: cmd_question
-  Output: Question 21 Placez vous dans votre repertoire de travail 
-  CorrectAnswer: setwd("C:/Users/Yoann/Documents/Projet_tutore/ENQ101/Part1")
-  AnswerTests: omnitest(correctExpr='setwd("C:/Users/Yoann/Documents/Projet_tutore/ENQ101/Part1")')
-  Hint: il te suffit de taper 'setwd("C:/Users/Yoann/Documents/Projet_tutore/ENQ101/Part1")'
-  
-- Class: cmd_question
-  Output: Question 22 Importez les donnees du fichier HTA2.csv dans un objet que vous appelerez HTA2
+  Output: Question 21 Importez les donnees du fichier HTA2.csv (disponible dans votre repertoire de travail) dans un objet que vous appelerez HTA2
   CorrectAnswer: HTA2 <- read.csv2("HTA2.csv")
   AnswerTests: omnitest(correctExpr='HTA2 <- read.csv2("HTA2.csv")')
   Hint: il te suffit de taper 'HTA2 <- read.csv2("HTA2.csv")'
   
 - Class: cmd_question
-  Output: Question 23 Visualisez ces donnees 
+  Output: Question 22 Visualisez ces donnees 
   CorrectAnswer: View(HTA2)
   AnswerTests: omnitest(correctExpr='View(HTA2)')
   Hint: il te suffit de taper 'View(HTA2)'
@@ -206,7 +200,7 @@
   Output: Maintenant pour travailler sur les donnees, il va falloir selectionner des variables, on ne peut pas travailler sur l'integralite du tableau en meme temps.
 
 - Class: cmd_question
-  Output: Question 24 Par exemple selectionnez l'age des individus 
+  Output: Question 23 Par exemple selectionnez l'age des individus 
   CorrectAnswer: HTA2$AGE
   AnswerTests: omnitest(correctExpr='HTA2$AGE')
   Hint: il te suffit de taper 'HTA2$AGE'
