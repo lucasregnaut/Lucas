@@ -24,7 +24,7 @@
   Hint: Essayez plutot avec "MED <- rbind(TER1,TER2,TER3,TER4)"
 
 - Class: cmd_question
-  Output: La table MED contient alors 95 enregistrements. On verifie bien qu'il n'y a pas de doublons d'identifiant. Vous pouvez verifier par exemple que le plus grand des effectifs associes aux valeurs de l'identifiant (ID) est bien 1.
+  Output: La table MED contient alors 95 enregistrements. On verifie bien qu'il n'y a pas de doublons d'identifiant. Vous pouvez verifier par exemple que le plus grand des effectifs associes aux valeurs de l'identifiant (ID), le maximum, est bien 1.
   CorrectAnswer: max(table(MED$ID))
   AnswerTests: omnitest(correctExpr='max(table(MED$ID))')
   Hint: Essayez avec "max(table(MED$ID))"
@@ -40,12 +40,12 @@
   Output: Remarquez qu'il y a 93 enregistrements. Cela veut dire que 2 personnnes n'ont pas pu etre recontactees par telephone ou ont decide de ne pas donner suite a l'enquete.
 
 - Class: text
-  Output: Remarquez que les variables entre les deux tables sont differentes. Et si l'on veut faire correspondre les deux tables, il faudra utiliser l'identifiant commun des deux tables. Les donnees medicales et les donnees de satisfaction seront alors fusionnees horizontalement, grace a la fonction "merge".
+  Output: Remarquez aussi que les variables entre les deux tables sont differentes. Et si l'on veut faire correspondre les deux tables, il faudra utiliser l'identifiant commun des deux tables. Les donnees medicales et les donnees de satisfaction seront alors fusionnees horizontalement, grace a la fonction "merge".
 
 - Class: cmd_question
   Output: C'est a vous ! On appellera le resultat "complete". Pour executer cette fonction, on entrera d'abord les 2 tables dans les 2 premiers champs. Puis on precisera le libelle de l'identifiant commun dans la premiere table et dans la deuxieme table. Et, optionnellement, on peut par exemple ajouter "all.x=TRUE" qui permet d'inclure les 2 enregistrements de MED qui n'ont pas de correspondant dans la table SATISF. Ainsi ces enregistrements apparaissent dans "complete" avec des donnees manquantes pour les variables de SATISF.
   CorrectAnswer: complete <- merge(MED, SATISF, by.x="ID",by.y="IDENT",all.x=TRUE)
-  AnswerTests: omnitest(correctExpr='complete <- merge(MED, SATISF, by.x="ID",by.y="IDENT",all.x=TRUE)')
+  AnswerTests: any_of_exprs('complete <- merge(x=MED, y=SATISF, by.x="ID",by.y="IDENT",all.x=TRUE)','complete <- merge(MED, SATISF, "ID","IDENT",all.x=TRUE)','complete <- merge(x=SATISF, y=MED, by.x="IDENT",by.y="ID",all.x=TRUE)','complete <- merge(SATISF, MED, "IDENT","ID",all.x=TRUE)')
   Hint: La syntaxe ressemblera a ceci = complete <- merge(premiere table, deuxieme table, identifiant premiere table, identifiant deuxieme table, all.x)
 
 - Class: text
@@ -54,8 +54,8 @@
 - Class: cmd_question
   Output: Dans un premier temps, pour recuperer le libelle des diagnostics il faut associer le code diagnostic de la table MED (DIAG) au code diagnostic du thesaurus des diagnostic (code_diag). On nommera le resultat "urgence_diag" et ajoutera "all.x=TRUE".
   CorrectAnswer: urgence_diag <- merge(MED, DIAG, by.x="DIAG",by.y="code_diag",all.x=TRUE)
-  AnswerTests: omnitest(correctExpr='urgence_diag <- merge(MED, DIAG, by.x="DIAG",by.y="code_diag",all.x=TRUE)')
-  Hint: Dans la meme logique que la question precedente, la reponse sera = urgence_diag <- merge(MED, DIAG, by.x="DIAG",by.y="code_diag",all.x=TRUE)
+  AnswerTests: any_of_exprs('urgence_diag <- merge(x=MED, y=DIAG, by.x="DIAG",by.y="code_diag",all.x=TRUE)','urgence_diag <- merge(MED, DIAG, "DIAG","code_diag",all.x=TRUE)','urgence_diag <- merge(x=DIAG, y=MED, by.x="code_diag",by.y="DIAG",all.x=TRUE)','urgence_diag <- merge(DIAG, MED, "code_diag","DIAG",all.x=TRUE)')
+  Hint: Dans la meme logique que la question precedente, la reponse sera = urgence_diag <- merge(x=MED, y=DIAG, by.x="DIAG",by.y="code_diag",all.x=TRUE)
 
 - Class: text
   Output: all.x= TRUE est obligatoire pour ne pas perdre les enregistrements de MED sans diagnostic renseigne. Et all.y= TRUE est a eviter pour ne pas inclure a tort des enregistrements quasi-vides, avec uniquement les code et libelle correspondants a des codes du thesaurus n'ont utilise dans MED.
@@ -63,14 +63,14 @@
 - Class: cmd_question
   Output: On repart de cette nouvelle table pour lui associer le libelle des motifs. La nouvelle table s'appellera "urgence_diag_mot".
   CorrectAnswer: urgence_diag_mot <- merge(urgence_diag, MOTIF, by.x="MOTIF",by.y="code_motif",all.x=TRUE)
-  AnswerTests: omnitest(correctExpr='urgence_diag_mot <- merge(urgence_diag, MOTIF, by.x="MOTIF",by.y="code_motif",all.x=TRUE)')
-  Hint: On ecrira ici = urgence_diag_mot <- merge(urgence_diag, MOTIF, by.x="MOTIF",by.y="code_motif",all.x=TRUE)
+  AnswerTests: omnitest(correctExpr='urgence_diag_mot <- merge(x=urgence_diag, y=MOTIF, by.x="MOTIF",by.y="code_motif",all.x=TRUE)')
+  Hint: On ecrira ici = urgence_diag_mot <- merge(x=urgence_diag, y=MOTIF, by.x="MOTIF",by.y="code_motif",all.x=TRUE)
 
 - Class: cmd_question
   Output: Dans cette table pour le service des urgences, on peut enlever les 2 premieres colonnes correspondant aux codes. Le resultat se nommera "urgence".
   CorrectAnswer: urgence <- urgence_diag_mot[,-c(1,2)]
   AnswerTests: omnitest(correctExpr='urgence <- urgence_diag_mot[,-c(1,2)]')
-  Hint: Peut-etre qu'il faut revoir la partie pour selectionner des lignes/colonnes. En attendant le resultat attendu est = urgence <- urgence_diag_mot[,-c(1,2)]
+  Hint: Peut-etre qu'il faut revoir la partie pour selectionner des lignes/colonnes. En attendant le resultat attendu est "urgence <- urgence_diag_mot[,-c(1,2)]"
 
 - Class: text
   Output: La table urgence contient 95 enregistrements et 26 variables, comme MED.
