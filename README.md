@@ -27,7 +27,7 @@ swirl()
 
 ### Les forces de Swirl :
 - il rend le déroulement des TD interactif (donne des indices)
-- reprend le mécanisme de CodeAcademy.com qui a déjà fait ses preuves (HTML, PHP, JavaScript, SQL...), mais ici appliqué sur R
+- reprend le mécanisme de [CodeAcademy](https://www.codecademy.com/fr) qui a déjà fait ses preuves (HTML, PHP, JavaScript, SQL...), mais ici appliqué sur R
 
 ### Les faiblesses de Swirl :
 - problème d'encodage UTF-8 : cours en français mais sans accent
