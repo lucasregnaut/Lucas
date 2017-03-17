@@ -32,7 +32,7 @@ swirl()
 - la possibilité de partager en local et en ligne
 
 ### Les faiblesses de Swirl :
-- le problème d'encodage UTF-8 : cours en français mais sans accent
+- le problème d'encodage UTF-8 : cours en français mais sans accent (en attendant de trouver une solution)
 - s'il existe beaucoup de bonnes réponses possibles, Swirl peut sembler inadapté  : le code sera aussi long que le nombre de bonnes réponses possibles
 - si on veut mettre ses cours en ligne sur GitHub, il faudra aussi apprendre à utiliser GitHub
 - s'il y a une mauvaise réponse, cela ne renvoie qu'un seul indice (pas un indice selon les cas)
