@@ -100,7 +100,7 @@
   Output: Vecteurs
 
 - Class: text
-  Output: Un vecteur est un objet mathematique contenant un certain nombre de valeurs. On l'ecrit de la maniere suivante X <- c(val1, val2, ...)
+  Output: Un vecteur est un objet mathématique contenant un certain nombre de valeurs. On l'ecrit de la maniere suivante X <- c(val1, val2, ...)
 
 - Class: cmd_question
   Output: Question 11 Cree un vecteur X contenant les valeurs 1 2 3 4 et 5

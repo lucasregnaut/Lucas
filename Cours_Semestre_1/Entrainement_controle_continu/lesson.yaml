@@ -7,7 +7,7 @@
   Version: 2.4.2
 
 - Class: text
-  Output: Dans cette derniere lecon, nous allons mettre en application les differentes notions et concepts abordes lors des lecons precedentes.
+  Output: Dans cette dernière lecon, nous allons mettre en application les differentes notions et concepts abordes lors des lecons precedentes.
 
 - Class: cmd_question
   Output: Remarquez dans l'environnement de travail les 3 tables de donnees (mci, mbf, enf), nous souhaitons les fusionner. Pour cela, vous pouvez tout d'abord fusionner verticalement les tables "mci" et "mbf" en l'appelant "ci_bf".
